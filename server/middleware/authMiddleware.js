@@ -1,5 +1,3 @@
-const { json } = require('express')
-const e = require('express')
 const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 const protect = async (req,res,next) =>{
@@ -23,9 +21,19 @@ const protect = async (req,res,next) =>{
     })
   }
   // check if token exists in headers
- 
+}
+
+
+const admin = (req,res, next) =>{
+  if(!req.user.isAdmin){
+    return res.status(403).json({
+      status: 'fail',
+      message: "User is not authorized as an admin"
+    })
+  }
+  next()
 }
 
 
 
-module.exports = {protect}
+module.exports = { protect, admin}
