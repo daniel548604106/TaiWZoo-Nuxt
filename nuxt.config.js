@@ -35,6 +35,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/fontawesome',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -42,9 +43,12 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     
-
-
   ],
+  fontawesome: {
+    icons: {
+      solid: ['faHome'],
+    }
+  },
   // proxy: {
   //   '/api':{
   //     target: 'http://localhost:3001',

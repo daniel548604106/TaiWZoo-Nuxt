@@ -1,6 +1,8 @@
 <template>
   <div>
 sdfsdf
+    <font-awesome-icon :icon="['fas', 'home']"  />
+
   </div>
 </template>
 

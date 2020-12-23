@@ -1,13 +1,16 @@
 <script>
+import Header from '@/components/global/Header.vue'
 export default {
   components:{
-  
+    Header
   }
 }
 </script>
 
 <template>
   <div>
+    
+    <Header/>
    <div class="main">
     <Nuxt />
    </div>
