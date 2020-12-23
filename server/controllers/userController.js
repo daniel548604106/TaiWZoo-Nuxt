@@ -1,5 +1,15 @@
 const User = require('../models/userModel')
 const generateToken = require('../lib/generateToken')
+
+const getMyData = async(req,res) =>{
+  console.log(req.headers)
+  res.status(200).json({
+    status: 'success'
+  })
+}
+
+
+
 const userSignup = async (req, res, next) => {
   try{
 
@@ -48,4 +58,5 @@ const userLogin = async(req,res,next) =>{
   }
 }
 
-module.exports = { userSignup, userLogin }
+
+module.exports = { userSignup, userLogin ,getMyData }
