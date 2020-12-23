@@ -1,6 +1,6 @@
 import { getMyData } from './meRequest'
 import {getTransportData} from './transportRequest'
-import { signup } from './userRequest'
+import { userSignup,userLogin } from './userRequest'
 
 
 // meRequest
@@ -10,5 +10,6 @@ export const apiGetMyData = getMyData
 export const apiGetTransportData = getTransportData
 
 // userRequest
-export const apiSignup = signup
+export const apiUserSignup = userSignup
+export const apiUserLogin = userLogin
 
