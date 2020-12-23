@@ -11,6 +11,10 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  env: {
+    TRANSPORTATION_ID: process.env.TRANSPORTATION_ID,
+    TRANSPORTATION_KEY: process.env.TRANSPORTATION_KEY
+  },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
@@ -18,6 +22,10 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+
+    '~/plugins/notification.js',
+    '~/plugins/localStorage.js',
+    '~/plugins/cookie.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -33,8 +41,17 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-  ],
+    
 
+
+  ],
+  // proxy: {
+  //   '/api':{
+  //     target: 'http://localhost:3001',
+  //     changeOrigin: true
+  //   }
+  // },
+    
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
 

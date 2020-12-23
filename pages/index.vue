@@ -1,21 +1,29 @@
 <script>
-import { apiSignup } from '@/api'
+  import {apiGetTransportData} from '@/api'
 export default {
   data() {
     return {
       data: '',
+      data2: {}
     }
   },
-  async mounted() {
-    const { data } = await apiSignup({ name: 'adasdasdas', email: 'sdfsdfs' })
+  async fetch(){
+   
+  },
+   async mounted() {
+    const data =  await apiGetTransportData('Hsinchu')
     console.log(data)
+   console.log('id',process.env.TRANSPORTATION_ID)
   },
 }
 </script>
 <template>
   <div class="container">
-    <div>{{ data }}</div>
     <div>
+      <div>
+        {{data2}}
+      </div>
+      
       <h1 class="title text-26px text-vue-main">TaiWZoo</h1>
       <div class="links">
         <a
