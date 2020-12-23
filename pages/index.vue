@@ -1,5 +1,5 @@
 <script>
-  import {apiGetTransportData} from '@/api'
+  import {apiGetTransportData ,apiSignup} from '@/api'
 export default {
   data() {
     return {
@@ -11,6 +11,8 @@ export default {
    
   },
    async mounted() {
+     const user = await apiSignup({name: 'Daniel',email: '12aas3qqw@gmail.com', password: 12313})
+    console.log(user)
     const data =  await apiGetTransportData('Hsinchu')
     console.log(data)
    console.log('id',process.env.TRANSPORTATION_ID)
