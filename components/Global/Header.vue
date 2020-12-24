@@ -29,7 +29,7 @@
   }
 </script>
 <template>
-  <div class="w-full h-80px px-30px shadow-lg">
+  <div class="w-full h-50px px-30px shadow-lg">
     <div class="w-full h-full max-w-1200 mx-auto flex items-center justify-between">
       <div>
         <nuxt-link to="/">

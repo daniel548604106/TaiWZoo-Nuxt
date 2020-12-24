@@ -5,16 +5,18 @@ import Header from '@/components/global/Header.vue'
 import Auth from '@/components/auth/Index.vue'
 import Overlay from '@/components/global/Overlay.vue'
 import CreateJourney from '@/components/travel/Create/Index.vue'
+import HeaderMobile from '@/components/global/Mobile/Header.vue'
 export default {
   components:{
     Header,
     Auth,
     Overlay,
-    CreateJourney
+    CreateJourney,
+    HeaderMobile
   },
   computed:{
     ...mapGetters('auth',['isAuthOpen']),
-    ...mapGetters('travel',['isCreateJourneyShow'])
+    ...mapGetters('travel',['isCreateJourneyShow']),
   },
   methods:{
     ...mapMutations('auth',['setUserLogin'])
@@ -29,7 +31,7 @@ export default {
 
 <template>
   <div>
-    <div class="header">
+    <div class="header sm:hidden block">
       <Header/>
     </div>
     <div class="main">
@@ -40,8 +42,11 @@ export default {
         <Auth/>
       </Overlay>
     </div>
-    <div  :class="['create-journey','top-0',{'top-100%':!isCreateJourneyShow }]">
+    <div  :class="['create-journey','h-0',{'h-100vh':isCreateJourneyShow }]">
       <CreateJourney/>
+    </div>
+    <div class="fixed w-full bottom-0 z-12 sm:block hidden">
+      <HeaderMobile/>
     </div>
    <notifications group="foo" />
 
@@ -50,10 +55,10 @@ export default {
 
 <style>
 .main{
-  height: calc(100vh - 120px)
+  height: calc(100vh - 50px)
 }
 
 .create-journey{
-  @apply absolute transition-all duration-300 ease-in-out left-0 z-11 w-full
+  @apply absolute transition-all duration-300 ease-in-out top-0 left-0 z-11 w-full
 }
 </style>

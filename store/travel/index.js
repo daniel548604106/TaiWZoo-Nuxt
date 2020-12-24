@@ -14,6 +14,7 @@ export const mutations = {
 export const actions = {
   toggleCreateJourney({commit}){
     commit('toggleCreateJourney')
+    console.log('change')
   }
 }
 export const getters = {
