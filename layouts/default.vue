@@ -1,4 +1,5 @@
 <script>
+import { mapGetters } from 'vuex'
 import Header from '@/components/global/Header.vue'
 import Auth from '@/components/auth/Index.vue'
 import Overlay from '@/components/global/Overlay.vue'
@@ -7,6 +8,9 @@ export default {
     Header,
     Auth,
     Overlay
+  },
+  computed:{
+    ...mapGetters('auth',['isAuthOpen'])
   }
 }
 </script>
@@ -19,7 +23,7 @@ export default {
     <div class="main">
       <Nuxt />
     </div>
-    <div class="auth">
+    <div v-if="isAuthOpen" class="auth">
       <Overlay>
         <Auth/>
       </Overlay>

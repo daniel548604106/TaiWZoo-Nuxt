@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full fixed top-0 left-0 z-8 bg-gray-200 bg-opacity-5 ">
+  <div class="w-100vw h-100vh fixed top-0 left-0 z-8 bg-black bg-opacity-50 ">
     <slot></slot>
   </div>
 </template>

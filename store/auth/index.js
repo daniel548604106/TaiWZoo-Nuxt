@@ -1,8 +1,9 @@
 import {apiUserSignup , apiUserLogin} from '@/api'
 import Cookie from 'js-cookie'
 export const state = () =>({
-  isUserLoggedIn: false,
   authType: 'login',
+  isAuthOpen: false,
+  isUserLoggedIn: false,
   
 })
 
@@ -12,6 +13,9 @@ export const mutations ={
   },
   toggleAuthType(state, payload){
     state.authType = payload
+  },
+  toggleAuthOpen(state){
+    state.isAuthOpen = !state.isAuthOpen
   }
 
 }
@@ -29,11 +33,21 @@ export const actions ={
   },
   toggleAuthType({commit},payload){
     commit('toggleAuthType',payload)
+  },
+  toggleAuthOpen({commit},payload){
+    commit('toggleAuthOpen')
+    if(payload){
+     commit('toggleAuthType',payload)
+    }
   }
 }
 
 export const getters ={
   authType(state){
     return state.authType
+  },
+  isAuthOpen(state){
+    return state.isAuthOpen
   }
+
 }
