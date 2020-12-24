@@ -47,6 +47,7 @@ import {
   faEdit,
   faUser,
   faEye,
+  faChevronLeft,
   faExpandArrowsAlt,
   faEyeSlash
 } from '@fortawesome/free-solid-svg-icons'
@@ -68,6 +69,7 @@ library.add(
   faSearch,
   faSearchLocation,
   faBell,
+  faChevronLeft,
   faQuestionCircle,
   faCheck,
   faUserCircle,
@@ -104,6 +106,7 @@ library.add(
   faAngleUp,
   faReply,
   faTrash,
+  faChevronLeft,
   faGithubSquare,
   faGoogle,
   faExclamationCircle,
