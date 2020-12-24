@@ -1,5 +1,6 @@
 <script>
-import { mapGetters } from 'vuex'
+import Cookie from 'js-cookie'
+import { mapGetters, mapMutations } from 'vuex'
 import Header from '@/components/global/Header.vue'
 import Auth from '@/components/auth/Index.vue'
 import Overlay from '@/components/global/Overlay.vue'
@@ -11,6 +12,14 @@ export default {
   },
   computed:{
     ...mapGetters('auth',['isAuthOpen'])
+  },
+  methods:{
+    ...mapMutations('auth',['setUserLogin'])
+  },
+  mounted(){
+    if(Cookie.get('auth')){
+      this.setUserLogin()
+    }
   }
 }
 </script>

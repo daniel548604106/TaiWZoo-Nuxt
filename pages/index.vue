@@ -1,6 +1,6 @@
 <script>
-  import {apiGetTransportData ,apiSignup,apiUserLogin} from '@/api'
-  import Cookie from 'js-cookie'
+  // import {apiGetTransportData ,apiSignup,apiUserLogin} from '@/api'
+  // import Cookie from 'js-cookie'
 export default {
   data() {
     return {
@@ -11,15 +11,15 @@ export default {
   async fetch(){
    
   },
-   async mounted() {
-     const user = await apiUserLogin({email: 'daniel548604106@gmail.com', password: 'newhome601406845'})
-    console.log(user.data.token)
-    Cookie.set('auth', user.data.token)
+  //  async mounted() {
+  //    const user = await apiUserLogin({email: 'daniel548604106@gmail.com', password: 'newhome601406845'})
+  //   console.log(user.data.token)
+  //   Cookie.set('auth', user.data.token)
 
-    const data =  await apiGetTransportData('Hsinchu')
-    console.log(data)
-   console.log('id',process.env.TRANSPORTATION_ID)
-  },
+  //   const data =  await apiGetTransportData('Hsinchu')
+  //   console.log(data)
+  //  console.log('id',process.env.TRANSPORTATION_ID)
+  // },
 }
 </script>
 <template>

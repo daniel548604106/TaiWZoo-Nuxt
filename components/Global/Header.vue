@@ -1,9 +1,12 @@
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   export default {
+    computed:{
+      ...mapGetters('auth',['isUserLoggedIn'])
+    },
     methods:{
       ...mapActions('auth',['toggleAuthOpen']),
-    }
+    },
   }
 </script>
 <template>
@@ -13,7 +16,8 @@
         <img src="~/assets/logo.svg" class="w-30px h-30px" alt="">
       </div>
       <div>
-        <ul class="flex items-center">
+        <div v-if="isUserLoggedIn">UserData</div>
+        <ul v-else class="flex items-center">
           <li class="cursor-pointer" @click="toggleAuthOpen('login')">Login</li>
           <li class="cursor-pointer"  @click="toggleAuthOpen('signup')">Signup</li>
         </ul>
