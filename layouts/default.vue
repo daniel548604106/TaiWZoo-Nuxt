@@ -1,19 +1,29 @@
 <script>
 import Header from '@/components/global/Header.vue'
+import Auth from '@/components/auth/Index.vue'
+import Overlay from '@/components/global/Overlay.vue'
 export default {
   components:{
-    Header
+    Header,
+    Auth,
+    Overlay
   }
 }
 </script>
 
 <template>
   <div>
-    
-    <Header/>
-   <div class="main">
-    <Nuxt />
-   </div>
+    <div class="header">
+      <Header/>
+    </div>
+    <div class="main">
+      <Nuxt />
+    </div>
+    <div class="auth">
+      <Overlay>
+        <Auth/>
+      </Overlay>
+    </div>
    <notifications group="foo" />
 
   </div>

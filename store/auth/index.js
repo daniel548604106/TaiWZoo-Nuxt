@@ -1,23 +1,39 @@
+import {apiUserSignup , apiUserLogin} from '@/api'
+import Cookie from 'js-cookie'
 export const state = () =>({
-  idx: 0,
-  name: 'Daniel'
+  isUserLoggedIn: false,
+  authType: 'login',
+  
 })
 
 export const mutations ={
-  addCount(state){
-    state.idx += 1
+  userLogin(state){
+    console.log('hi')
+  },
+  toggleAuthType(state, payload){
+    state.authType = payload
   }
+
 }
 
 
 
 export const actions ={
-  addCount({commit}){
-    commit('addCount')
-    console.log('added')
+  async userLogin({commit},payload){
+    try{
+      const user = await apiUserLogin(payload)
+      console.log(user)
+    }catch(error){
+      console.log(error)
+    }
+  },
+  toggleAuthType({commit},payload){
+    commit('toggleAuthType',payload)
   }
 }
 
 export const getters ={
-
+  authType(state){
+    return state.authType
+  }
 }

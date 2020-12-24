@@ -36,6 +36,7 @@ module.exports = {
       colors: {
         transparent: "transparent",
         "vue-main": "#E4BA7A",
+        "vue-white": "#fafafa",
         "vue-dark": "#212436",
         "vue-footer": "#30344F",
         "vue-gray": "#eeeeee",
