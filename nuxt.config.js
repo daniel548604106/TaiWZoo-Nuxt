@@ -28,7 +28,8 @@ export default {
     '~/plugins/fontawesome.js',
     '~/plugins/notification.js',
     '~/plugins/localStorage.js',
-    '~/plugins/cookie.js'
+    '~/plugins/cookie.js',
+    { src: '~/plugins/toggleSwitch.js', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

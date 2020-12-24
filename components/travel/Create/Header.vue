@@ -28,7 +28,7 @@
   <div class="w-full">
     <div class="header px-15px">
       <font-awesome-icon @click="toggleCreateJourney" :icon="['fas', icon1 ]" style="font-size:20px"/>
-      <h1>{{title}}</h1>
+      <h1 class="text-18px font-semibold">{{title}}</h1>
       <div>
         <font-awesome-icon v-if="icon2" @click="toggleCreateJourney" :icon="['fas', icon2 ]" style="font-size:20px"/>
         <font-awesome-icon v-if="icon3" @click="toggleCreateJourney" :icon="['fas', icon3 ]" style="font-size:20px"/>
