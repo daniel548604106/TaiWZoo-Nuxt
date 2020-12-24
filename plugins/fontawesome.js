@@ -47,6 +47,7 @@ import {
   faEdit,
   faUser,
   faEye,
+  faImages,
   faChevronLeft,
   faExpandArrowsAlt,
   faEyeSlash
@@ -75,6 +76,7 @@ library.add(
   faUserCircle,
   faEnvelope,
   faLock,
+  faImages,
   faTimes,
   faArrowLeft,
   faArrowRight,

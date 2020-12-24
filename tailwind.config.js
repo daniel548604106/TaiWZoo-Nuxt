@@ -38,6 +38,7 @@ module.exports = {
         "vue-main": "#E4BA7A",
         "vue-white": "#fafafa",
         "vue-dark": "#212436",
+        "vue-green": "#13bec9",
         "vue-footer": "#30344F",
         "vue-gray": "#eeeeee",
         "vue-title-active": "#444444",

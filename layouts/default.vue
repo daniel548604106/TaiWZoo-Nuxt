@@ -2,9 +2,9 @@
 import Cookie from 'js-cookie'
 import { mapGetters, mapMutations } from 'vuex'
 import Header from '@/components/global/Header.vue'
-import Auth from '@/components/auth/Index.vue'
+import Auth from '@/components/auth/index.vue'
 import Overlay from '@/components/global/Overlay.vue'
-import CreateJourney from '@/components/travel/Create/Index.vue'
+import CreateJourney from '@/components/travel/Create/index.vue'
 import HeaderMobile from '@/components/global/Mobile/Header.vue'
 export default {
   components:{
