@@ -1,4 +1,5 @@
 <script>
+  import { mapActions } from 'vuex'
   import JourneyCard from '@/components/travel/JourneyCard.vue'
   import Button from '@/components/global/Button.vue'
   export default {
@@ -8,8 +9,12 @@
     },
     data(){
       return{
-        img: require('~/assets/images/journey.png')
+        img: require('~/assets/images/journey.png'),
+        hasData: false
       }
+    },
+    methods:{
+      ...mapActions('travel',['toggleCreateJourney'])
     }
   }
 </script>
@@ -30,7 +35,7 @@
       <h2 class="text-13px mt-10px">Start your journey</h2>
       <font-awesome-icon :icon="['fas','sort-down']"/>
     </div>
-    <div class="w-full max-w-325 mx-auto absolute bottom-50px left-1/2 transform -translate-x-1/2 ">
+    <div @click="toggleCreateJourney" class="w-full max-w-325 mx-auto absolute bottom-50px left-1/2 transform -translate-x-1/2 ">
       <Button :text="'Create My Journey'" />
     </div>
   </div>

@@ -4,14 +4,17 @@ import { mapGetters, mapMutations } from 'vuex'
 import Header from '@/components/global/Header.vue'
 import Auth from '@/components/auth/Index.vue'
 import Overlay from '@/components/global/Overlay.vue'
+import CreateJourney from '@/components/travel/Create/Index.vue'
 export default {
   components:{
     Header,
     Auth,
-    Overlay
+    Overlay,
+    CreateJourney
   },
   computed:{
-    ...mapGetters('auth',['isAuthOpen'])
+    ...mapGetters('auth',['isAuthOpen']),
+    ...mapGetters('travel',['isCreateJourneyShow'])
   },
   methods:{
     ...mapMutations('auth',['setUserLogin'])
@@ -37,6 +40,9 @@ export default {
         <Auth/>
       </Overlay>
     </div>
+    <div  :class="['create-journey','top-0',{'top-100%':!isCreateJourneyShow }]">
+      <CreateJourney/>
+    </div>
    <notifications group="foo" />
 
   </div>
@@ -45,5 +51,9 @@ export default {
 <style>
 .main{
   height: calc(100vh - 120px)
+}
+
+.create-journey{
+  @apply absolute transition-all duration-300 ease-in-out left-0 z-11 w-full
 }
 </style>
