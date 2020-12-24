@@ -15,6 +15,7 @@ export default {
     TRANSPORTATION_ID: process.env.TRANSPORTATION_ID,
     TRANSPORTATION_KEY: process.env.TRANSPORTATION_KEY
   },
+  
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
@@ -30,7 +31,7 @@ export default {
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
-
+  loading: '~/components/Loading.vue',
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
