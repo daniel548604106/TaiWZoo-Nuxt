@@ -53,9 +53,6 @@ export default {
     <div  :class="['mobile-side-menu',{'active': mobileSideMenuShow }]">
       <MobileSideMenu/>
     </div>
-    <div v-if="mobileSideMenuShow">
-      sdosiofjsoifjosi
-    </div>
     <div class="fixed w-full bottom-0 z-12 sm:block hidden">
       <MobileTabMenu/>
     </div>
@@ -65,22 +62,25 @@ export default {
 </template>
 
 <style>
-.main{
-  height: calc(100vh - 50px)
+  .main{
+  height: calc(100vh - 50px);
 }
 
-.mobile-side-menu{
+
+.mobile-side-menu.active { 
+  @apply translate-x-full;
+}
+
+.mobile-side-menu {
   @apply fixed z-13 top-0 w-full -left-full transform  transition-all duration-200 ease-in-out;
 }
 
-.mobile-side-menu.active{
-  @apply translate-x-full
-}
-
 .create-journey{
-  @apply absolute transition-all duration-300 ease-in-out top-0 left-0 z-11 w-full
+  @apply absolute transition-all top-0 duration-300 ease-in-out  -left-full z-11 w-full;
 }
 .create-journey.active{
-  @apply transform translate-y-full
+  @apply transform translate-x-full
 }
+
+
 </style>

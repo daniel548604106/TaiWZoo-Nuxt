@@ -43,7 +43,7 @@ module.exports = {
         "vue-gray": "#eeeeee",
         "vue-title-active": "#444444",
         "vue-menu": "#aaaaaa",
-        "vue-menu-active": "#e9486d",
+        "vue-pink": "#e9486d",
         primary: {
           "100%": "#D5AD78",
           "80%": "rgba(212, 80, 113, 0.8)",

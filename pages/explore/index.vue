@@ -1,8 +1,10 @@
 <script>
   import Card from '@/components/explore/Card.vue'
+  import MobileHeader from '@/components/global/Mobile/Header.vue'
   export default {
     components:{
-      Card
+      Card,
+      MobileHeader
     },
     data(){
       return{
@@ -12,15 +14,20 @@
   }
 </script>
 <template>
-  <div class="w-full  px-10px">
-    <div class="tabs">
-      <ul>
-        <li class="active">Discover</li>
-        <li>Following</li>
-      </ul>
+  <div class="w-full">
+    <div>
+      <MobileHeader :title="'Explore'"/>
     </div>
-    <div class="w-full max-w-600 mx-auto">
-      <Card :img="img" /> 
+    <div class="px-10px">
+      <div class="tabs">
+        <ul>
+          <li class="active">Discover</li>
+          <li>Following</li>
+        </ul>
+      </div>
+      <div class="w-full max-w-600 mx-auto">
+        <Card :img="img" /> 
+      </div>
     </div>
   </div>
 </template>

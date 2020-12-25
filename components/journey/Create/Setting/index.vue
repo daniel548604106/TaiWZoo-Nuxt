@@ -1,4 +1,5 @@
 <script>
+  import { mapActions } from 'vuex'
    import Header from '@/components/journey/Create/Header.vue'
   import Button from '@/components/global/Button.vue'
   import Overlay from '@/components/global/Overlay.vue'
@@ -27,8 +28,10 @@
       }
     },
     methods:{
+      ...mapActions('journey',['toggleCreateJourney']),
       complete(){
         console.log('completed')
+        this.toggleCreateJourney()
         // post data
         // close create popup
         // redirect to journey/journey/:id
