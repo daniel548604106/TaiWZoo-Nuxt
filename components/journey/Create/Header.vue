@@ -24,7 +24,7 @@
       },
     },
     methods:{
-      ...mapActions('travel',['toggleCreateJourney','proceedTo']),
+      ...mapActions('journey',['toggleCreateJourney','proceedTo']),
       clickAction(){
         switch(this.icon1){
           case 'times':
@@ -54,7 +54,7 @@
 <style lang="postcss" scoped>
 
 .header{
-  @apply w-full py-20px flex items-center justify-between shadow-md
+  @apply w-full py-15px flex items-center justify-between shadow-md
 }
 
 </style>

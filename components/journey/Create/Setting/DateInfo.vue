@@ -23,6 +23,6 @@
 </template>
 
 
-<style lang="scss" scoped>
-
+<style lang="postcss" scoped>
+  
 </style>

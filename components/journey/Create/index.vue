@@ -1,8 +1,8 @@
 <script>
   import { mapGetters } from 'vuex'
-  import Destination from '@/components/travel/Create/Destination/index.vue'
-  import Date from '@/components/travel/Create/Date/index.vue'
-  import Setting from '@/components/travel/Create/Setting/index.vue'
+  import Destination from '@/components/journey/Create/Destination/index.vue'
+  import Date from '@/components/journey/Create/Date/index.vue'
+  import Setting from '@/components/journey/Create/Setting/index.vue'
   export default {
     components:{
       Destination,
@@ -11,7 +11,7 @@
 
     },
     computed:{
-      ...mapGetters('travel',['journeyStep'])
+      ...mapGetters('journey',['journeyStep'])
     }
   }
 </script>

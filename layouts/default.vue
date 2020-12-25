@@ -4,19 +4,19 @@ import { mapGetters, mapMutations } from 'vuex'
 import Header from '@/components/global/Header.vue'
 import Auth from '@/components/auth/index.vue'
 import Overlay from '@/components/global/Overlay.vue'
-import CreateJourney from '@/components/travel/Create/index.vue'
-import HeaderMobile from '@/components/global/Mobile/Header.vue'
+import CreateJourney from '@/components/journey/Create/index.vue'
+import MobileTabMenu from '@/components/global/Mobile/TabMenu.vue'
 export default {
   components:{
     Header,
     Auth,
     Overlay,
     CreateJourney,
-    HeaderMobile
+    MobileTabMenu
   },
   computed:{
     ...mapGetters('auth',['isAuthOpen']),
-    ...mapGetters('travel',['isCreateJourneyShow']),
+    ...mapGetters('journey',['isCreateJourneyShow']),
   },
   methods:{
     ...mapMutations('auth',['setUserLogin'])
@@ -42,11 +42,11 @@ export default {
         <Auth/>
       </Overlay>
     </div>
-    <div  :class="['create-journey','h-0',{'h-100vh':isCreateJourneyShow }]">
+    <div  :class="['create-journey',{'active':isCreateJourneyShow }]">
       <CreateJourney/>
     </div>
     <div class="fixed w-full bottom-0 z-12 sm:block hidden">
-      <HeaderMobile/>
+      <MobileTabMenu/>
     </div>
    <notifications group="foo" />
 
@@ -60,5 +60,8 @@ export default {
 
 .create-journey{
   @apply absolute transition-all duration-300 ease-in-out top-0 left-0 z-11 w-full
+}
+.create-journey.active{
+  @apply transform translate-y-full
 }
 </style>

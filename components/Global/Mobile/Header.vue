@@ -1,21 +1,34 @@
-
 <script>
+  import { mapActions } from 'vuex'
   export default {
-    
+    props:{
+      title:{
+        type:String,
+        default: ''
+      },
+    },
+    methods:{
+    }
   }
 </script>
 <template>
-  <div>
-     <ul class="w-full py-10px h-50px bg-white shadow-lg border-t flex items-center justify-around">
-          <li ><nuxt-link to="/"><img src="~/assets/images/home.svg" alt=""></nuxt-link></li>
-          <li ><nuxt-link to="/explore"><img src="~/assets/images/explore.svg" alt=""></nuxt-link></li>
-          <li ><nuxt-link to="/travel"><img src="~/assets/images/travel.svg" alt=""></nuxt-link></li>
-          <li ><nuxt-link to="/social"><img src="~/assets/images/social.svg" alt=""></nuxt-link></li>
-          <li ><nuxt-link to="/profile"><img src="~/assets/images/profile.svg" alt=""></nuxt-link></li>
-      </ul>
+  <div class="w-full">
+    <div class="header px-15px relative">
+      <img  class="menu" src="~/assets/images/menu.svg" alt="">
+      <h1 class="text-18px absolute left-1/2 transform -translate-x-1/2 font-semibold">{{title}}</h1>
+      <div class="flex items-center">
+        <img class="mr-10px" src="~/assets/images/notification.svg" alt="">
+        <img src="~/assets/images/message.svg" alt="">
+      </div>
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+
+<style lang="postcss" scoped>
+
+.header{
+  @apply w-full pt-20px pb-15px flex items-center justify-between
+}
 
 </style>

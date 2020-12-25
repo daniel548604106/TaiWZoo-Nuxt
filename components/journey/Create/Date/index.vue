@@ -1,8 +1,8 @@
 <script>
   import { mapActions } from 'vuex'
-  import Header from '@/components/travel/Create/Header.vue'
+  import Header from '@/components/journey/Create/Header.vue'
   import Button from '@/components/global/Button.vue'
-  import DatePicker from '@/components/travel/Create/DatePicker.vue'
+  import DatePicker from '@/components/journey/Create/DatePicker.vue'
   export default {
     components:{
       Header,
@@ -15,7 +15,7 @@
       }
     },
     methods:{
-      ...mapActions('travel',['proceedTo'])
+      ...mapActions('journey',['proceedTo'])
     }
   }
 </script>

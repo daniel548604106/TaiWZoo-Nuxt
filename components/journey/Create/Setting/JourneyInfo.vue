@@ -23,6 +23,8 @@
   }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="postcss" scoped>
+  input{
+    @apply bg-gray-100 rounded-6px w-full py-9px px-10px text-12px
+  }
 </style>

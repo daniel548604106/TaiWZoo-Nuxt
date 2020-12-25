@@ -51,7 +51,8 @@ import {
   faImages,
   faChevronLeft,
   faExpandArrowsAlt,
-  faEyeSlash
+  faEyeSlash,
+  faEllipsisV
 } from '@fortawesome/free-solid-svg-icons'
 // far
 import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
@@ -80,6 +81,8 @@ library.add(
   faImages,
   faTimes,
   faUserPlus,
+  faEllipsisV,
+  faShareAlt,
   faArrowLeft,
   faArrowRight,
   faArrowCircleLeft,

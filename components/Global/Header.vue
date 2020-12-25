@@ -40,7 +40,7 @@
         <ul class="tabs flex items-center">
           <li :class="{active: activeTab()}"><nuxt-link to="/"><img src="~/assets/images/home.svg" alt=""></nuxt-link></li>
           <li :class="{active: activeTab('explore')}"><nuxt-link to="/explore"><img src="~/assets/images/explore.svg" alt=""></nuxt-link></li>
-          <li :class="{active: activeTab('travel')}"><nuxt-link to="/travel"><img src="~/assets/images/travel.svg" alt=""></nuxt-link></li>
+          <li :class="{active: activeTab('journey')}"><nuxt-link to="journey"><img src="~/assets/images/journey.svg" alt=""></nuxt-link></li>
           <li :class="{active: activeTab('social')}"><nuxt-link to="/social"><img src="~/assets/images/social.svg" alt=""></nuxt-link></li>
         </ul>
       </div>

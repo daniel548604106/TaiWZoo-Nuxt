@@ -1,8 +1,8 @@
 <script>
   import { mapActions } from 'vuex'
-  import Header from '@/components/travel/Create/Header.vue'
-  import Tag from '@/components/travel/Create/Destination/Tag.vue'
-  import Card from '@/components/travel/Create/Destination/Card.vue'
+  import Header from '@/components/journey/Create/Header.vue'
+  import Tag from '@/components/journey/Create/Destination/Tag.vue'
+  import Card from '@/components/journey/Create/Destination/Card.vue'
   import Button from '@/components/global/Button.vue'
   export default {
     components:{
@@ -31,7 +31,7 @@
       }
     },
     methods:{
-      ...mapActions('travel',['proceedTo'])
+      ...mapActions('journey',['proceedTo'])
     }
   }
 </script>
