@@ -1,21 +1,25 @@
 export const state = () =>({
-  idx: 0
+  mobileSideMenuShow: false
 })
 
 export const mutations ={
-  addCount(state){
-    state.idx += 1
+  toggleMobileSideMenu(state){
+    console.log('changed')
+    state.mobileSideMenuShow = !state.mobileSideMenuShow
+    console.log(state.mobileSideMenuShow)
   }
 }
 
 
 
 export const actions ={
-  addCount({commit}){
-    commit('addCount')
+  toggleMobileSideMenu({commit}){
+    commit('toggleMobileSideMenu')
   }
 }
 
 export const getters ={
-
+  mobileSideMenuShow(state){
+    return state.mobileSideMenuShow
+  }
 }

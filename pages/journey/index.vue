@@ -28,7 +28,7 @@
 </script>
 <template>
   <div class="w-full relative h-full flex flex-col items-center ">
-    <div class="w-full">
+    <div class="w-full hidden sm:block">
       <MobileHeader :title="'My Journey'"/>
     </div>
     <div class=" px-10px w-full">

@@ -6,17 +6,21 @@ import Auth from '@/components/auth/index.vue'
 import Overlay from '@/components/global/Overlay.vue'
 import CreateJourney from '@/components/journey/Create/index.vue'
 import MobileTabMenu from '@/components/global/Mobile/TabMenu.vue'
+import MobileSideMenu from '@/components/global/Mobile/SideMenu.vue'
 export default {
   components:{
     Header,
     Auth,
     Overlay,
     CreateJourney,
-    MobileTabMenu
+    MobileTabMenu,
+    MobileSideMenu
   },
   computed:{
     ...mapGetters('auth',['isAuthOpen']),
     ...mapGetters('journey',['isCreateJourneyShow']),
+    ...mapGetters(['mobileSideMenuShow'])
+    
   },
   methods:{
     ...mapMutations('auth',['setUserLogin'])
@@ -25,6 +29,7 @@ export default {
     if(Cookie.get('auth')){
       this.setUserLogin()
     }
+    console.log('checking',this.mobileSideMenuShow)
   }
 }
 </script>
@@ -45,6 +50,12 @@ export default {
     <div  :class="['create-journey',{'active':isCreateJourneyShow }]">
       <CreateJourney/>
     </div>
+    <div  :class="['mobile-side-menu',{'active': mobileSideMenuShow }]">
+      <MobileSideMenu/>
+    </div>
+    <div v-if="mobileSideMenuShow">
+      sdosiofjsoifjosi
+    </div>
     <div class="fixed w-full bottom-0 z-12 sm:block hidden">
       <MobileTabMenu/>
     </div>
@@ -56,6 +67,14 @@ export default {
 <style>
 .main{
   height: calc(100vh - 50px)
+}
+
+.mobile-side-menu{
+  @apply fixed z-13 top-0 w-full -left-full transform  transition-all duration-200 ease-in-out;
+}
+
+.mobile-side-menu.active{
+  @apply translate-x-full
 }
 
 .create-journey{
