@@ -6,6 +6,10 @@
         type:String,
         default: ''
       },
+      to:{
+        type: String,
+        default: ''
+      },
       icon1:{
         type:String,
         default: ''
@@ -20,14 +24,23 @@
       },
     },
     methods:{
-      ...mapActions('travel',['toggleCreateJourney'])
+      ...mapActions('travel',['toggleCreateJourney','proceedTo']),
+      clickAction(){
+        switch(this.icon1){
+          case 'times':
+           this.toggleCreateJourney()
+           break;
+           case 'chevron-left':
+          this.proceedTo(this.to)
+        }
+      }
     }
   }
 </script>
 <template>
   <div class="w-full">
     <div class="header px-15px">
-      <font-awesome-icon @click="toggleCreateJourney" :icon="['fas', icon1 ]" style="font-size:20px"/>
+      <font-awesome-icon @click="clickAction" :icon="['fas', icon1 ]" style="font-size:20px"/>
       <h1 class="text-18px font-semibold">{{title}}</h1>
       <div>
         <font-awesome-icon v-if="icon2" @click="toggleCreateJourney" :icon="['fas', icon2 ]" style="font-size:20px"/>

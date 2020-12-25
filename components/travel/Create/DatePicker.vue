@@ -29,7 +29,7 @@
 </script>
 <template>
   <div class="w-full px-15px">
-    <div class="mx-auto flex items-center justify-center mt-80px">
+    <div class="mx-auto flex items-center justify-center">
       <no-ssr>
         <v-date-picker
           :columns="$screens({ default: 1, lg: 2 })"
