@@ -40,19 +40,21 @@ const patchMyData = async(req,res) =>{
 const userSignup = async (req, res, next) => {
   try{
     const { name , email, password} = req.body
+    const account = email.split('@')[0]
     console.log(name,email,password)
     // check if email exists
     const userExists = await User.findOne({email})
     if(userExists){
       return next(new Error('This account already exists!'))
     }
-    const newUser = await User.create({name,email,password})
+    const newUser = await User.create({name,email,password,account})
     console.log(newUser)
     res.status(200).json({
       status: 'success',
       id: newUser._id,
       name: newUser.name,
       email: newUser.email,
+      account: newUser.account,
       isAdmin: newUser.isAdmin,
       token: generateToken(newUser._id)
     })

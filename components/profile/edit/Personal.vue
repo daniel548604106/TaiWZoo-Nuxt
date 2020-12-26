@@ -43,7 +43,7 @@
         <img src="~/assets/images/avatar.png" alt="">
         </div>
       <div class="w-300px">
-        <h2>daniel548604106</h2>
+        <h2>{{user.account}}</h2>
         <button class="text-vue-main">Change Profile Picture</button>
       </div>
     </div>
