@@ -35,7 +35,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div >
     <div class="header sm:hidden block">
       <Header/>
     </div>
@@ -62,6 +62,10 @@ export default {
 </template>
 
 <style>
+
+body{
+  background: #f0f0f0;
+}
   .main{
   height: calc(100vh - 50px);
 }

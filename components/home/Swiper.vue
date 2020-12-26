@@ -1,11 +1,11 @@
 <template>
   <div class="swiper-container" v-swiper:mySwiper="swiperOption">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" :key="banner" v-for="banner in banners">
+      <div class="swiper-slide" :key="banner.image" v-for="banner in banners">
         <img  :src="banner.image" />
       </div>
     </div>
-    <div class="swiper-pagination"></div>
+    <div class="swiper-pagination">sdsdf</div>
   </div>
 </template>
  
@@ -21,17 +21,12 @@
         } ,{
           image: 'https://images.unsplash.com/photo-1529671434436-8fbb37410056?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2250&q=80'
         }],
-        sswiperOptions: {
-        loop: false,
-        slidesPerView: 1,
-        centeredSlides: true,
-        pagination: {
-          el: ".swiper-pagination",
-          type: "bullets",
-          clickable: true,
-        },
-      },
-
+        swiperOption: {
+          pagination: {
+            el: '.swiper-pagination'
+          },
+          // Some Swiper option/callback...
+        }
       }
     },
     mounted() {
@@ -52,6 +47,10 @@
       text-align: center;
       font-size: 18px;
       background: #fff;
+    }
+
+    .swiper-pagination{
+      width: 100px;
     }
   </style>
   
