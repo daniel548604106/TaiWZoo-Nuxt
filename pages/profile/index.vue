@@ -25,20 +25,35 @@ import Posts from '@/components/profile/Posts.vue'
   }
 </script>
 <template>
-  <div  class=" w-full pt-10px py-50px px-15px flex flex-col bg-opacity-75 items-center h-234px relative">
-    <div class="fixed z-5 top-10px px-15px w-full flex items-center justify-between">
+  <div  class=" w-full pt-10px py-50px flex flex-col bg-opacity-75 items-center h-234px relative">
+    <div class="fixed z-5 top-10px px-15px w-full hidden sm:flex  items-center justify-between">
       <h1 class=" text-12px">@sdfsdfsdf</h1>
       <font-awesome-icon  :icon="['fas','bars']" class=""/>
     </div>
-    <Status class="w-full"/>
-    <Description/>
-    <Badge/>
-    <Posts/>
+    <div class="content max-limit">
+      <Status class="w-full"/>
+      <Description/>
+    </div>
+    <div class="w-full max-limit">
+      <Badge/>
+    </div>
+    <div class="content max-limit">
+       <Posts/>
+    </div>
 
   </div>
 </template>
 
 
 <style lang="postcss" scoped>
- 
+ .content{
+   margin:auto;
+   width: 90%;
+   
+   max-width: 600px;
+ }
+
+ .max-limit{
+   @apply max-w-700
+ }
 </style>

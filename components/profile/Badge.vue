@@ -1,7 +1,7 @@
 <template>
   <div class="w-full py-10px border-t border-b my-15px">
-    <div class="flex items-center justify-between">
-      <div>
+    <div class="flex items-center justify-between mx-15px">
+      <div class="">
         <h2>Badges</h2>
         <div class="flex mt-5px">
           <img src="~/assets/images/explore.svg" class="mr-10px" alt="">

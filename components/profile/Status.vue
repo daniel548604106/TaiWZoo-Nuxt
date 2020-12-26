@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mt-50px  w-full flex items-center justify-between">
-      <div class="mt-5px ">
+      <div class="mt-5px w-220px truncate">
       <h1 class="text-32px font-semibold">Daniel Yeh</h1>
       <div class="flex items-center mt-5px">
         <div class="text-center mr-20px">
@@ -13,6 +13,11 @@
         <h1 class="text-12px">Following</h1>
       </div>
       </div>
+        <div class="w-100px mt-10px px-10px rounded-10px py-5px text-center border">
+          <nuxt-link to="/profile/edit">
+            <button class="text-12px">Edit Profile</button>
+          </nuxt-link>
+        </div>
       </div>
       <div class="relative">
         <img src="https://lh3.googleusercontent.com/ogw/ADGmqu87s_TZoEN4Jcn-RTAzfKg_V007JYwQIQlDCfzokA=s192-c-mo" class="rounded-1/2 w-100px h-100px" alt="">
