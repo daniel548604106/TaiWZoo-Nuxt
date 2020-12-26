@@ -2,17 +2,21 @@ const User = require('../models/userModel')
 const generateToken = require('../lib/generateToken')
 
 const getMyData = async(req,res) =>{
-  console.log(req.headers)
-  res.status(200).json({
-    status: 'success'
-  })
+  try{
+    const user = await User.findById(req.user._id)
+    console.log(user)
+    res.status(200).json({
+      status: 'success',
+      user
+    })
+
+  }catch(error){
+    console.log(error)
+  }
 }
-
-
 
 const userSignup = async (req, res, next) => {
   try{
-
     const { name , email, password} = req.body
     console.log(name,email,password)
     // check if email exists
@@ -34,7 +38,6 @@ const userSignup = async (req, res, next) => {
     console.log(error)
   }
 }
-
 
 const userLogin = async(req,res,next) =>{
   try{

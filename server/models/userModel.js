@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please tell us your name'],
     },
+    account:{
+      type: String,
+      lowercase: true
+    },
     email: {
       type: String,
       required: true,
@@ -15,13 +19,25 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-   
+    },
+    biography:{
+      type: String,
+      default: ''
+    },
+    avatar:{
+      type:String,
+      default: ''
+    },
+    gender:{
+      type:String,
+      default: '',
     },
     isAdmin:{
       type:Boolean,
       required: true,
       default: false
-    }
+    },
+
   },
   {
     timestamps: true,

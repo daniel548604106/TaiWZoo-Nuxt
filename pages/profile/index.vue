@@ -1,6 +1,7 @@
 <script>
 
 import Cookie from 'js-cookie'
+import { mapActions , mapGetters} from 'vuex'
 import {apiGetMyData}  from '@/api'
 import Status from '@/components/profile/Status.vue'
 import Description from '@/components/profile/Description.vue'
@@ -15,12 +16,20 @@ import Posts from '@/components/profile/Posts.vue'
     },
     data(){
       return{
+        user:{},
         img: require('~/assets/images/journey.png')
       }
     },
+    methods:{
+      ...mapActions('account',['getMeData'])
+    },
+    computed:{
+      ...mapGetters('account',['meData'])
+    },
     async mounted(){
-      const data = await apiGetMyData()
-      console.log(data)
+      await this.getMeData()
+      this.user = this.meData
+      console.log('user',this.user)
     }
   }
 </script>
@@ -31,7 +40,7 @@ import Posts from '@/components/profile/Posts.vue'
       <font-awesome-icon  :icon="['fas','bars']" class=""/>
     </div>
     <div class="content max-limit">
-      <Status class="w-full"/>
+      <Status class="w-full" :user="user"/>
       <Description/>
     </div>
     <div class="w-full max-limit">

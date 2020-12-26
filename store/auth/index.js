@@ -30,7 +30,14 @@ export const actions ={
   async userLogin({commit},payload){
     try{
       const user = await apiUserLogin(payload)
+      const {token, ...userInfo} = user.data
+      console.log('token',token)
       console.log(user)
+      Cookie.set('auth', token)
+      console.log('auth',Cookie.get('auth'))
+      Cookie.set('userInfo', JSON.stringify(userInfo))
+      commit('toggleAuthOpen')
+      commit('setUserLogin')
     }catch(error){
       console.log(error)
     }

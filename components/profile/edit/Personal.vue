@@ -2,8 +2,11 @@
 <script>
   export default {
     props:{
-      name:String,
-      default: ''
+      user:{
+        type:Object,
+        default: {}
+      }
+
     },
     data(){
       return {
@@ -17,6 +20,11 @@
           type: 'Others'
         },
         ]
+      }
+    },
+    methods:{
+      save(){
+        console.log('saved')
       }
     }
   }
@@ -34,25 +42,31 @@
     </div>
     <div class="flex items-center">
       <h1>Name</h1>
-      <input type="text" v-model="name" placeholder="Name">
+      <input type="text" v-model="user.name" placeholder="Name">
     </div>
     <div class="flex items-center">
       <h1>Account</h1>
-      <input type="text" v-model="account" placeholder="Account">
+      <input type="text" v-model="user.account" placeholder="Account">
     </div>
     <div class="flex items-center">
       <h1>Website</h1>
-      <input type="text" v-model="website" placeholder="Website">
+      <input type="text" v-model="user.website" placeholder="Website">
     </div>
     <div class="flex items-center">
       <h1>Biography</h1>
-      <textarea type="text" v-model="biography" placeholder="Bio"></textarea>
+      <textarea type="text" v-model="user.biography" placeholder="Bio"></textarea>
     </div>
     <div class="flex items-center">
       <h1>Gender</h1>
-      <select type="text" v-model="biography" placeholder="Bio">
-        <option v-for="gender in genders" :key="gender" :value="gender">{{gender.type}}</option>
-      </select>
+      <div >
+        <select type="text" class="block" v-model="user.gender" placeholder="Bio">
+          <option v-for="gender in genders" :key="gender.id" :value="gender">{{gender.type}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex items-center">
+      <h1></h1>
+      <button @click="save" class="inline-block w-full py-10px mt-10px rounded-10px text-white bg-vue-main">Save</button>
     </div>
   </div>
 </template>

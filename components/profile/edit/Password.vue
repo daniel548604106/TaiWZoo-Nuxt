@@ -1,7 +1,13 @@
 
 <script>
   export default {
-    
+    data(){
+      return{
+        oldPassword:'',
+        newPassword: '',
+        confirmPassword:''
+      }
+    }
   }
 </script>
 <template>

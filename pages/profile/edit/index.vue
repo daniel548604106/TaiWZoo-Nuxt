@@ -1,4 +1,5 @@
 <script>
+  import { mapGetters, mapActions} from 'vuex'
   import Sidebar from '@/components/profile/edit/Sidebar.vue'
   import Personal from '@/components/profile/edit/Personal.vue'
   import Password from '@/components/profile/edit/Password.vue'
@@ -6,11 +7,22 @@
   import Notification from '@/components/profile/edit/Notification.vue'
   
   export default {
-    Sidebar,
+    components:{
+      Sidebar,
     Personal,
     Password,
     SocialAccount,
     Notification
+    },
+    computed:{
+      ...mapGetters('account',['meData'])
+    },
+    methods:{
+      ...mapActions('account',['getMeData'])
+    },
+    async mounted() {
+      await this.getMeData()
+    },
   }
 </script>
 <template>
@@ -21,7 +33,7 @@
     <div class="flex-1" >
       <div>
         <h2>Profile</h2>
-        <Personal/>
+        <Personal  :user="meData"/>
       </div>
       <div class="mt-20px">
         <h2 >Password</h2>
