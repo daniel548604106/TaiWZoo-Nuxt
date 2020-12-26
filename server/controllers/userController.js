@@ -15,6 +15,28 @@ const getMyData = async(req,res) =>{
   }
 }
 
+const patchMyData = async(req,res) =>{
+  try{
+    console.log(req.body)
+    const { name, account, website, biography, gender} = req.body
+    const user = await User.findById(req.user._id)
+    
+    user.name = name 
+    user.account = account 
+    user.website = website 
+    user.biography = biography 
+    user.gender = gender 
+    await user.save()
+    
+    res.status(200).json({
+      status: 'success',
+      user
+    })
+  }catch(error){
+    console.log(error)
+  }
+}
+
 const userSignup = async (req, res, next) => {
   try{
     const { name , email, password} = req.body
@@ -62,4 +84,4 @@ const userLogin = async(req,res,next) =>{
 }
 
 
-module.exports = { userSignup, userLogin ,getMyData }
+module.exports = { userSignup, userLogin ,getMyData , patchMyData }

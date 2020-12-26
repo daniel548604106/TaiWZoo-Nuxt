@@ -1,11 +1,11 @@
-import { getMyData } from './meRequest'
+import { getMyData,patchMyData } from './meRequest'
 import {getTransportData} from './transportRequest'
 import { userSignup,userLogin } from './userRequest'
 import { getAllUsers } from './adminRequest'
 
 // meRequest
 export const apiGetMyData = getMyData
-
+export const apiPatchMyData = patchMyData
 // transportRequest
 export const apiGetTransportData = getTransportData
 

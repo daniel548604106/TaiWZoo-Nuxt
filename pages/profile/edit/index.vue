@@ -8,7 +8,7 @@
   
   export default {
     components:{
-      Sidebar,
+    Sidebar,
     Personal,
     Password,
     SocialAccount,

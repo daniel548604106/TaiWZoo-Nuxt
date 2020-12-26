@@ -1,5 +1,6 @@
 
 <script>
+  import { mapActions} from 'vuex'
   export default {
     props:{
       user:{
@@ -10,21 +11,27 @@
     },
     data(){
       return {
-        genders:[{
-          type: 'Male'
-        },
-        {
-          type: 'Female'
-        },
-        {
-          type: 'Others'
-        },
-        ]
+        genders:['Male','Female','Others'],
+        name: this.user.name || '',
+        account: this.user.account || '',
+        website: this.user.website || '',
+        biography: this.user.biography || '',
+        gender: this.user.gender || ''
       }
     },
     methods:{
-      save(){
-        console.log('saved')
+      ...mapActions('account',['patchMeData']),
+      async save(){
+        const data = {
+          name: this.name,
+          account: this.account,
+          website: this.website,
+          biography: this.biography,
+          gender: this.gender
+        }
+        console.log('checkDataa', data)
+        await this.patchMeData(data)
+        
       }
     }
   }
@@ -42,25 +49,25 @@
     </div>
     <div class="flex items-center">
       <h1>Name</h1>
-      <input type="text" v-model="user.name" placeholder="Name">
+      <input type="text" v-model="name" placeholder="Name">
     </div>
     <div class="flex items-center">
       <h1>Account</h1>
-      <input type="text" v-model="user.account" placeholder="Account">
+      <input type="text" v-model="account" placeholder="Account">
     </div>
     <div class="flex items-center">
       <h1>Website</h1>
-      <input type="text" v-model="user.website" placeholder="Website">
+      <input type="text" v-model="website" placeholder="Website">
     </div>
     <div class="flex items-center">
       <h1>Biography</h1>
-      <textarea type="text" v-model="user.biography" placeholder="Bio"></textarea>
+      <textarea type="text" v-model="biography" placeholder="Bio"></textarea>
     </div>
     <div class="flex items-center">
       <h1>Gender</h1>
       <div >
-        <select type="text" class="block" v-model="user.gender" placeholder="Bio">
-          <option v-for="gender in genders" :key="gender.id" :value="gender">{{gender.type}}</option>
+        <select type="text" class="block" v-model="gender" placeholder="Bio">
+          <option v-for="gender in genders" :key="gender.id" :value="gender">{{gender}}</option>
         </select>
       </div>
     </div>

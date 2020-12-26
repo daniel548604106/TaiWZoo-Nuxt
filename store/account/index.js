@@ -1,4 +1,4 @@
-import {apiGetMyData} from '@/api'
+import {apiGetMyData, apiPatchMyData} from '@/api'
 export const state = () =>({
   meData: {}
 })
@@ -16,6 +16,12 @@ export const actions ={
     const {data} = await apiGetMyData()
     commit('setMeData',data.user)
 
+  },
+  async patchMeData({commit},payload){
+    console.log('vuex',payload)
+    const {data} = await apiPatchMyData(payload)
+    console.log(data.user)
+    commit('setMeData', data.user)
   }
 
 }
