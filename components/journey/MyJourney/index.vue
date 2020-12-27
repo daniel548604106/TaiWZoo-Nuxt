@@ -3,12 +3,16 @@
   import BasicInfo from '@/components/journey/MyJourney/BasicInfo.vue'
   import Tabs from '@/components/journey/MyJourney/Tabs.vue'
   import Schedule from '@/components/journey/MyJourney/Schedule.vue'
+  import Location from '@/components/journey/MyJourney/Location/index.vue'
+  import Hotel from '@/components/journey/MyJourney/Hotel.vue'
   export default {
     components:{
       Header,
       BasicInfo,
       Tabs,
-      Schedule
+      Schedule,
+      Location,
+      Hotel
     },
     props:{
       journeyInfo:{
@@ -40,8 +44,14 @@
    <div class="sticky top-50px bg-white">
      <Tabs :changeTab="changeTab" :activeTab="activeTab"/>
    </div>
-   <div>
+   <div v-if="activeTab === 1">
      <Schedule/>
+   </div>
+   <div v-if="activeTab === 2">
+     <Location/>
+   </div>
+   <div v-if="activeTab === 3">
+     <Hotel/>
    </div>
 
    
