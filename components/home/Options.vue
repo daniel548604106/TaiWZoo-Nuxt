@@ -1,21 +1,5 @@
-<template>
-<div>
-  <div class="bg-white rounded-t-md w-150px text-center mx-auto py-5px ">
-    <h1 class="text-vue-main text-26px font-semibold italic">Daily</h1>
-  </div>
-  <div class="w-full bg-white border-b rounded-5px py-10px px-20px flex items-center justify-start flex-wrap">
-    <div v-for="option in options" :key="option.title" class="mb-10px w-1/4" >
-      <nuxt-link :to='option.link' class="flex flex-col items-center">
-      <img :src="option.icon" alt="">
-      <h1>{{option.title}}</h1>
-      </nuxt-link>
-    </div>
-  </div>
-
-</div>
-</template>
-
 <script>
+  import {mapActions} from 'vuex'
   export default {
     data(){
       return{
@@ -63,9 +47,32 @@
         },
         ]
       }
+    },
+    methods:{
+      ...mapActions(['togglePage','switchActivePage']),
+      toggle(link){
+        this.togglePage()
+        this.switchActivePage(link)
+      }
     }
   }
 </script>
+<template>
+<div>
+  <div class="bg-white rounded-t-xl w-150px text-center mx-auto py-5px ">
+    <h1 class="text-vue-main text-26px font-semibold italic">Daily</h1>
+  </div>
+  <div class="w-full bg-white border-b rounded-5px py-10px px-20px flex items-center justify-start flex-wrap">
+    <div  @click="toggle(option.link)" v-for="option in options" :key="option.title" class="mb-10px w-1/4 flex flex-col items-center" >
+      <img :src="option.icon" alt="">
+      <h1>{{option.title}}</h1>
+      
+    </div>
+  </div>
+
+</div>
+</template>
+
 
 <style lang="scss" scoped>
 

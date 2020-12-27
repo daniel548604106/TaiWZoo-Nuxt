@@ -7,6 +7,7 @@ import Overlay from '@/components/global/Overlay.vue'
 import CreateJourney from '@/components/journey/Create/index.vue'
 import MobileTabMenu from '@/components/global/Mobile/TabMenu.vue'
 import MobileSideMenu from '@/components/global/Mobile/SideMenu.vue'
+import PopupPage from '@/components/popupPage/index.vue'
 export default {
   components:{
     Header,
@@ -14,12 +15,13 @@ export default {
     Overlay,
     CreateJourney,
     MobileTabMenu,
-    MobileSideMenu
+    MobileSideMenu,
+    PopupPage
   },
   computed:{
     ...mapGetters('auth',['isAuthOpen']),
     ...mapGetters('journey',['isCreateJourneyShow']),
-    ...mapGetters(['mobileSideMenuShow'])
+    ...mapGetters(['mobileSideMenuShow','activePage','pageShow'])
     
   },
   methods:{
@@ -42,6 +44,9 @@ export default {
     <div class="main">
       <Nuxt />
     </div>
+    <div :class="['popup-page',{'active':pageShow}]">
+      <PopupPage/>
+    </div>
     <div v-if="isAuthOpen" class="auth">
       <Overlay>
         <Auth/>
@@ -63,13 +68,17 @@ export default {
 
 <style>
 
-body{
-  background: #f0f0f0;
-}
   .main{
   height: calc(100vh - 50px);
 }
 
+.popup-page{
+  @apply fixed top-0 -right-full z-13 transition ease-in-out duration-200;
+}
+
+.popup-page.active{
+  @apply transform -translate-x-full
+}
 
 .mobile-side-menu.active { 
   @apply translate-x-full;

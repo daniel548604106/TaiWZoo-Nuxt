@@ -20,6 +20,6 @@ const request = axios.create({
   headers: getAuthorizationHeader()
 })
 
-export const getTransportData = (city) =>{
+export const getTransportationData = (city) =>{
   return request.get(`/v2/Bus/RealTimeByFrequency/Streaming/City/${city}`)
 }

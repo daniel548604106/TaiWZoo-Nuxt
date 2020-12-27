@@ -23,6 +23,11 @@
         default: ''
       },
     },
+    data(){
+      return{
+        changeBgColor: false
+      }
+    },
     methods:{
       ...mapActions('journey',['toggleCreateJourney','proceedTo']),
       clickAction(){
@@ -33,12 +38,22 @@
            case 'chevron-left':
           this.proceedTo(this.to)
         }
+      },
+      test(){
+        window.scrollY > 310 ? this.changeBgColor  = true: this.changeBgColor = false
+
       }
-    }
+    },
+    mounted(){
+      window.addEventListener('scroll', this.test)
+    },
+    destroyed() {
+      window.removeEventListener('scroll', this.test)
+    },
   }
 </script>
 <template>
-  <div class="w-full">
+  <div :class="['w-full','transition','duration-200',{'bg-color': changeBgColor}]">
     <div class="header px-15px">
       <font-awesome-icon @click="clickAction" :icon="['fas', icon1 ]" style="font-size:20px"/>
       <h1 class="text-18px font-semibold">{{title}}</h1>
@@ -55,6 +70,10 @@
 
 .header{
   @apply w-full py-15px flex items-center justify-between
+}
+
+.bg-color{
+  @apply bg-white text-gray-800
 }
 
 </style>

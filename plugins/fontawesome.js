@@ -27,6 +27,7 @@ import {
   faTools,
   faCube,
   faBookOpen,
+  faEllipsisV,
   faArrowRight,
   faArrowLeft,
   faArrowCircleLeft,
@@ -52,10 +53,12 @@ import {
   faUserPlus,
   faEye,
   faImages,
+  faHotel,
+  faCalendarAlt,
   faChevronLeft,
   faExpandArrowsAlt,
   faEyeSlash,
-  faEllipsisV
+  faMapMarkedAlt,
 } from '@fortawesome/free-solid-svg-icons'
 // far
 import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
@@ -83,6 +86,8 @@ library.add(
   faEnvelope,
   faChevronRight,
   faLock,
+  faCalendarAlt,
+  faMapMarkedAlt,
   faImages,
   faTimes,
   faUserPlus,
@@ -94,6 +99,7 @@ library.add(
   faArrowCircleLeft,
   faArrowCircleRight,
   faBookmark,
+  faHotel,
   farBookmark,
   faPlay,
   faStar,

@@ -22,8 +22,9 @@ export default {
 }
 </script>
 <template>
-  <div class="container">
+  <div class="body">
     <div class="w-full">
+   
       <div class="relative">
         <Swiper/>
         <div class="bottom-0px w-full transform -translate-y-1/2 absolute z-9  left-1/2 -translate-x-1/2">
@@ -48,4 +49,7 @@ export default {
 
 <style>
 
+.body{
+  background: #f0f0f0;
+}
 </style>
