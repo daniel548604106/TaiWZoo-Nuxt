@@ -2,6 +2,10 @@
 123
 ## Build Setup
 
+
+## How to install mapbox
+https://dev.to/hmintoh/how-to-mapbox-with-vue-js-2a34
+
 ```bash
 # install dependencies
 $ npm install

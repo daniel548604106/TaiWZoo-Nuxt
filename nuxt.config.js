@@ -8,12 +8,14 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {rel: 'stylesheet', href:'https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' }
     ]
   },
   env: {
     TRANSPORTATION_ID: process.env.TRANSPORTATION_ID,
-    TRANSPORTATION_KEY: process.env.TRANSPORTATION_KEY
+    TRANSPORTATION_KEY: process.env.TRANSPORTATION_KEY,
+    MAPBOX_TOKEN: process.env.MAPBOX_TOKEN
   },
   
 
@@ -24,8 +26,10 @@ export default {
 
   ],
 
+
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    {src: '~/plugins/mapbox.js', ssr: false},
     { src: "~/plugins/swiper.js", ssr: false },
     { src: '~plugins/v-calendar.js', ssr: false },
     '~/plugins/fontawesome.js',
