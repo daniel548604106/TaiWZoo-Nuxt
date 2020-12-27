@@ -35,13 +35,13 @@
   }
 </script>
 <template>
-<div class="shadow-sm" >
+<div  >
   <div  class="flex items-center justify-around w-full py-15px ">
     <font-awesome-icon @click="tabClick(1)"  :icon="['fas','calendar-alt']" :class="{active: activeTab === 1}"/>
     <font-awesome-icon @click="tabClick(2)" :icon="['fas','map-marked-alt']" :class="{active: activeTab === 2}"/>
     <font-awesome-icon @click="tabClick(3)" :icon="['fas','hotel']" :class="{active: activeTab === 3}"/>
   </div>
-  <div class="flex items-center justify-between px-15px pb-10px">
+  <div class="flex items-center justify-between px-15px pb-5px">
     <div class="flex items-center">
       <div v-for="n in 5" class="mr-10px" :key="n">
         {{n}}
