@@ -1,8 +1,10 @@
 <script>
   import Mapbox from '@/components/journey/MyJourney/Location/Mapbox.vue'
+  import Attraction from '@/components/journey/MyJourney/Location/Attraction.vue'
   export default {
     components:{
-      Mapbox
+      Mapbox,
+      Attraction
     }
   }
 </script>
@@ -15,7 +17,9 @@
     <div class="mt-10px mb-100px">
       <Mapbox/>
     </div>
-    <div>sdfsdf</div>
+    <div >
+      <Attraction/>
+    </div>
   </div>
 </template>
 
