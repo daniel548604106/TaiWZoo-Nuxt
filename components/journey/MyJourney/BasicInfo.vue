@@ -23,7 +23,7 @@
 <template>
   <div>
     <div class="relative">
-    <img src="~/assets/images/paris.png" class="w-full max-w-375 h-auto" alt="">
+    <img src="~/assets/images/paris.png" class="w-full h-auto" alt="">
     <div class="absolute bottom-30px left-30px ">
       <h1 class=" text-white text-26px font-semibold w-300px truncate">Paris C'est la vie</h1>
       <h2 class="mt-2px  text-white">{{journeyInfo.startingDate}}-{{journeyInfo.endingDate}}( {{totalDays}} days)</h2>

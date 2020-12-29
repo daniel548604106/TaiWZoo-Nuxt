@@ -1,38 +1,22 @@
+<script>
+  import { mapGetters } from 'vuex'
+  export default {
+      computed:{
+      ...mapGetters('journey',['attractionSearchInput'])
+    },
+  }
+</script>
 <template>
-  <div :class="['swiper-container',{'active': showContainer}]">
-<!-- only when swipe left can trigger the callback -->
-<h1>sdjoifjsodifjiosd</h1>
-<span v-touch:swipe.top="swipeTopHandler"  v-touch:swipe.down="swipeDownHandler" class="bg-vue-main text-white p-10px">Swipe Here</span>
+  <div class="w-full px-25px"> 
+    <div class="mt-20px" v-if="attractionSearchInput">
+      <h1>Search Result</h1>
+      <img src="~/assets/images/search-not-found.svg" class="w-100px mx-auto mt-10px" alt="">
+    </div>
+
   </div>
 </template>
 
-<script>
-  export default {
-    data(){
-      return{
-        showContainer: false
-      }
-    },
-    methods: {
-        swipeTopHandler (direction) {
-          this.showContainer = true
-            console.log(direction)  // May be left / right / top / bottom
-        },
-        swipeDownHandler(direction){
-          this.showContainer = false
-          console.log(direction)
-        }
-    }
-  }
-</script>
 
-<style lang="postcss" scoped>
-.swiper-container{
-  @apply h-50px w-full bg-vue-gray mb-100px
+<style lang="scss" scoped>
 
-}
-
-.swiper-container.active{
-  @apply h-300px w-full
-}
 </style>

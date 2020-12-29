@@ -4,6 +4,7 @@
   import Tabs from '@/components/journey/MyJourney/Tabs.vue'
   import Schedule from '@/components/journey/MyJourney/Schedule.vue'
   import Location from '@/components/journey/MyJourney/Location/index.vue'
+  import SwiperContainer from '@/components/journey/MyJourney/Location/SwiperContainer.vue'
   import Hotel from '@/components/journey/MyJourney/Hotel.vue'
   export default {
     components:{
@@ -12,7 +13,8 @@
       Tabs,
       Schedule,
       Location,
-      Hotel
+      Hotel,
+      SwiperContainer
     },
     props:{
       journeyInfo:{
@@ -49,6 +51,9 @@
    </div>
    <div v-if="activeTab === 2">
      <Location/>
+   </div>
+   <div class="absolute bottom-0 z-6 w-full" v-if="activeTab ===2">
+    <SwiperContainer/>
    </div>
    <div v-if="activeTab === 3">
      <Hotel/>

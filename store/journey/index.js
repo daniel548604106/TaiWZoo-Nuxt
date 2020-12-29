@@ -1,7 +1,8 @@
 export const state = () =>{
   return{
     isCreateJourneyShow: false,
-    journeyStep: 'destination'
+    journeyStep: 'destination',
+    attractionSearchInput: ''
   }
 }
 
@@ -13,6 +14,10 @@ export const mutations = {
   },
   proceedTo(state,payload){
     state.journeyStep = payload
+  },
+  addAttractionSearch(state,payload){
+    state.attractionSearchInput = payload
+    console.log('check')
   }
 }
 export const actions = {
@@ -22,6 +27,9 @@ export const actions = {
   },
   proceedTo({commit},payload){
     commit('proceedTo',payload)
+  },
+  addAttractionSearch({commit},payload){
+    commit('addAttractionSearch',payload)
   }
 }
 export const getters = {
@@ -30,5 +38,8 @@ export const getters = {
   },
   journeyStep(state){
     return state.journeyStep
+  },
+  attractionSearchInput(state){
+    return state.attractionSearchInput
   }
 }

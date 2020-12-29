@@ -55,7 +55,9 @@
 <template>
   <div :class="['w-full','transition','duration-200',{'bg-color': changeBgColor}]">
     <div class="header px-15px">
-      <font-awesome-icon :icon="['fas', icon1 ]" style="font-size:20px"/>
+      <nuxt-link to="/journey">
+       <font-awesome-icon :icon="['fas', icon1 ]" style="font-size:20px"/>
+      </nuxt-link>
       <h1 class="text-18px font-semibold">{{title}}</h1>
       <div>
         <font-awesome-icon v-if="icon2" @click="toggleCreateJourney" :icon="['fas', icon2 ]" style="font-size:20px"/>

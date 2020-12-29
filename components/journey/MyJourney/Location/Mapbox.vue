@@ -23,7 +23,7 @@ export default {
 }
 </script>
 <template>
-  <div id="map" class="map">
+  <div id="map" class="map ">
       <div id="mapContainer" class="basemap"></div>
   </div>
 </template>
