@@ -5,7 +5,8 @@
   import Schedule from '@/components/journey/MyJourney/Schedule.vue'
   import Location from '@/components/journey/MyJourney/Location/index.vue'
   import SwiperContainer from '@/components/journey/MyJourney/Location/SwiperContainer.vue'
-  import Hotel from '@/components/journey/MyJourney/Hotel.vue'
+  import AttractionInfo from '@/components/journey/MyJourney/Location/AttractionInfo/index.vue'
+  import Hotel from '@/components/journey/MyJourney/Hotel/index.vue'
   export default {
     components:{
       Header,
@@ -14,7 +15,8 @@
       Schedule,
       Location,
       Hotel,
-      SwiperContainer
+      SwiperContainer,
+      AttractionInfo
     },
     props:{
       journeyInfo:{
@@ -24,7 +26,8 @@
     },
     data(){
       return{
-        activeTab: 1
+        activeTab: 1,
+        attractionInfoShow: false
       }
     },
     methods:{
@@ -54,6 +57,9 @@
    </div>
    <div class="absolute bottom-0 z-6 w-full" v-if="activeTab ===2">
     <SwiperContainer/>
+   </div>
+   <div v-if="attractionInfoShow" class="absolute top-0 left-0 z-7 w-full">
+     <AttractionInfo />
    </div>
    <div v-if="activeTab === 3">
      <Hotel/>

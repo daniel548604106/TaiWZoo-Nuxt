@@ -14,6 +14,7 @@ import {
   faTimes,
   faBookmark,
   faPlay,
+  faEquals,
   faStar,
   faUserFriends,
   faCommentAlt,
@@ -26,6 +27,7 @@ import {
   faUserGraduate,
   faTools,
   faCube,
+  faMapMarkerAlt,
   faBookOpen,
   faEllipsisV,
   faArrowRight,
@@ -52,16 +54,21 @@ import {
   faUser,
   faUserPlus,
   faEye,
+  faDollarSign,
   faImages,
   faHotel,
   faCalendarAlt,
+  faMinus,
+
   faChevronLeft,
   faExpandArrowsAlt,
   faEyeSlash,
   faMapMarkedAlt,
+  faDivide,
 } from '@fortawesome/free-solid-svg-icons'
 // far
-import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons'
+import { faBookmark as farBookmark, faCreditCard,   
+} from '@fortawesome/free-regular-svg-icons'
 // fab
 import { faFacebookSquare, faLine, faTwitterSquare, faLinkedin, faGithubSquare, faGoogle } from '@fortawesome/free-brands-svg-icons'
 
@@ -80,6 +87,7 @@ library.add(
   faBell,
   faPlus,
   faChevronLeft,
+  faDivide,
   faQuestionCircle,
   faCheck,
   faUserCircle,
@@ -94,12 +102,14 @@ library.add(
   faEllipsisV,
   faCog,
   faShareAlt,
+  faMapMarkerAlt,
   faArrowLeft,
   faArrowRight,
   faArrowCircleLeft,
   faArrowCircleRight,
   faBookmark,
   faHotel,
+  faCreditCard,
   farBookmark,
   faPlay,
   faStar,
@@ -112,7 +122,9 @@ library.add(
   faLinkedin,
   faTag,
   faUser,
+  faMinus,
   faEye,
+  faEquals,
   faCaretDown,
   faThumbsUp,
   faUserGraduate,
@@ -125,6 +137,8 @@ library.add(
   faAngleUp,
   faReply,
   faTrash,
+  faDollarSign,
+
   faChevronLeft,
   faGithubSquare,
   faGoogle,

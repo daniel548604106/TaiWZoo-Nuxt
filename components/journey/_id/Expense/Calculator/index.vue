@@ -1,0 +1,71 @@
+<script>
+  import Panel from '@/components/journey/_id/Expense/Calculator/Panel.vue'
+  import Category from '@/components/journey/_id/Expense/Calculator/Category.vue'
+  export default {
+    components:{
+      Panel,
+      Category
+    },
+    props:{
+      showCalculator:{
+        type: Boolean,
+        default: false
+      },
+      toggleCalculator:{
+        type:Function,
+        default: () => {}
+      }
+    },
+    data(){
+      return {
+      }
+    }
+  }
+</script>
+<template>
+  <div :class="['calculator',{'h-80vh': showCalculator},{'h-0': !showCalculator},{'hidden': !showCalculator}]">
+   <div class="flex flex-col justify-between h-full">
+    <div>
+      <div class="flex items-center px-15px py-15px relative">
+      <font-awesome-icon class="text-gray-600 w-20px h-20px" @click="toggleCalculator"  :icon="['fas','times']" />
+      <select class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-vue-title-active text-white px-10px py-5px rounded-10px">
+        <option value="">Today</option>
+      </select>
+    </div>
+    <div class="flex mt-15px items-center justify-between px-15px">
+      <select class="py-10px px-10px rounded-20px bg-vue-main text-white" name="" id="">
+        <img class="absolute left-10px top-1/2 transform -translate-y-1/2 w-30px h-30px rounded-1/2" src="~/assets/images/avatar.png" alt="">
+        <option value="" class="flex items-center">
+          <span>Daniel</span>
+        </option>
+      </select>
+      <input type="text" class="text-right" placeholder="LUNCH (TAP TO EDIT)">
+    </div>
+    </div>
+    <div>
+      <div>
+      <Category/>
+    </div>
+    <div>
+      <Panel/>
+    </div>
+    </div>
+
+   </div>
+    <div>
+    </div>
+  </div>
+</template>
+
+
+<style lang="postcss" scoped>
+  .calculator{
+    @apply  bg-white w-full relative border shadow-md rounded-t-xl transition-all duration-300 ease-in-out
+  }
+  .active{
+    @apply h-50vh
+  }
+
+
+
+</style>
