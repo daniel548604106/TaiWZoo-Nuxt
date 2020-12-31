@@ -1,6 +1,13 @@
 const mongoose = require('mongoose')
 
 const journeySchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true,'Please give this journey a name']
+  },
+  imageCover:{
+    type: String,
+  },
   startDate:{
     type: Date,
     required: [true, 'Please write your starting date.']
@@ -8,13 +15,6 @@ const journeySchema = new mongoose.Schema({
   endDate:{
     type: Date,
     required: [true, 'Please write your ending date']
-  },
-  name: {
-    type: String,
-    required: [true,'Please give this journey a name']
-  },
-  imageCover:{
-    type: String,
   },
   locations:[{
     type:{
@@ -34,6 +34,10 @@ const journeySchema = new mongoose.Schema({
   },
   editSetting: Boolean,
   sharingSetting: Boolean,
+  createdBy:{
+    type: mongoose.Schema.ObjectId,
+    ref: 'User'
+  },
   participants: [{
     type: mongoose.schema.ObjectId,
     ref: 'User'
@@ -72,6 +76,15 @@ const journeySchema = new mongoose.Schema({
 
 })
 
+
+
+journeySchema.pre('/^find/', function(next){
+  this.populate({
+    path: 'createdBy',
+    select: '-password -passwordChangedAt'
+  })
+  next()
+})
 
 const Journey = mongoose.model('Journey', journeySchema)
 

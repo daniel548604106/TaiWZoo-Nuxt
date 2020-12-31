@@ -41,6 +41,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false
     },
+    journey:{
+      type: mongoose.Schema.ObjectId,
+      ref: 'Journey'
+    }
 
   },
   {
