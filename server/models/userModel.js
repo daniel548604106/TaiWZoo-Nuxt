@@ -41,14 +41,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false
     },
-    journey:{
-      type: mongoose.Schema.ObjectId,
-      ref: 'Journey'
-    }
 
   },
   {
     timestamps: true,
+    toJSON: {virtuals:true},
+    toObject: {virtuals: true}
   }
 )
 
@@ -64,6 +62,13 @@ userSchema.pre("save", async function(next) {
   const salt = await bcrypt.genSalt(10)
   this.password = await bcrypt.hash(this.password, salt)
   next()
+})
+
+//virtual populate
+userSchema.virtual('journeys',{
+  ref: 'Journey',
+  foreignField: 'createdBy',
+  localField: '_id'
 })
 
 const User = mongoose.model('User', userSchema)

@@ -58,7 +58,7 @@
       <nuxt-link to="/journey">
        <font-awesome-icon :icon="['fas', icon1 ]" style="font-size:20px"/>
       </nuxt-link>
-      <h1 class="text-18px font-semibold">{{title}}</h1>
+      <h1 class="absolute left-1/2 transform -translate-x-1/2 text-18px font-semibold">{{title}}</h1>
       <div>
         <font-awesome-icon v-if="icon2" @click="toggleCreateJourney" :icon="['fas', icon2 ]" style="font-size:20px"/>
         <font-awesome-icon v-if="icon3" @click="toggleCreateJourney" :icon="['fas', icon3 ]" style="font-size:20px"/>

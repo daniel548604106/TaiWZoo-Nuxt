@@ -1,5 +1,5 @@
 <script>
-  import { mapActions } from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
   import Header from '@/components/journey/Create/Header.vue'
   import Button from '@/components/global/Button.vue'
   import DatePicker from '@/components/journey/Create/DatePicker.vue'
@@ -11,8 +11,10 @@
     },
     data(){
       return {
-        totalDays: 5
       }
+    },
+    computed:{
+      ...mapGetters('journey',['journeyInfo'])
     },
     methods:{
       ...mapActions('journey',['proceedTo'])
@@ -23,11 +25,14 @@
   <div class="relative h-100vh bg-white">
     <Header :title="'Select Date'" :icon1="'chevron-left'" :to="'destination'"/>
     <div class="px-15px  ">
+      <div>
+        {{journeyInfo.totalDays}}
+      </div>
       <div class="mt-120px">
         <DatePicker />
       </div>
       <div @click="proceedTo('setting')" class="absolute bottom-80px w-320px left-1/2 transform -translate-x-1/2">
-        <Button  :text="`Next Step (${totalDays}days)`" />
+        <Button  :text="'Next Step'" :totalDays="journeyInfo.totalDays" />
       </div>
     </div>
   </div>

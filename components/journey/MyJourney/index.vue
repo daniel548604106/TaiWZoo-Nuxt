@@ -43,7 +43,7 @@
    <div class="fixed top-0 left-0 w-full z-5">
       <Header class="text-white" :title="'My Journey'" :icon1="'chevron-left'" :icon2="'cog'" :icon3="'ellipsis-v'"/>
    </div>
-   <div>
+   <div class="w-full">
      <BasicInfo :journeyInfo="journeyInfo"/>
    </div>
    <div class="sticky top-50px bg-white">

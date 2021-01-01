@@ -2,31 +2,28 @@
   import JourneyCard from '@/components/journey/JourneyCard.vue'
 
   export default {
+    props:{
+      ongoingJourney: {
+        type: Array,
+        default: []
+      }
+    },
     components:{
       JourneyCard
     },
     data(){
       return{
-        journeys:[{
-          data: '',
-          img: require('~/assets/images/journey.png'),
-          startingDate: '2020/12/13',
-          totalDays: 5,
-          participants:[{
-            name: 'Daniel',
-            avatar: require('~/assets/images/avatar.png')
-          }]
-        }]
+      
       }
     }
   }
 </script>
 <template>
-  <div class="h-full w-full flex items-center justify-center  transform -translate-y-20px">
-      <div v-if="journeys.length" class="w-full max-w-600 mx-auto">
-        <div class="w-full " v-for="journey in journeys" :key="journey.id">
+  <div class="h-full w-full   transform -translate-y-20px">
+      <div v-if="ongoingJourney.length" class="w-full max-w-600 mx-auto">
+        <div class="w-full mb-20px"  v-for="journey in ongoingJourney" :key="journey.id">
           <JourneyCard :journey="journey"/> 
-          <h1>sdfsdfsd</h1>
+          <h1>{{ongoingJourney.name}}</h1>
         </div>
       </div>
       <div v-else class="mt-80px sm:mt-20px flex flex-col items-center">

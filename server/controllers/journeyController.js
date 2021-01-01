@@ -1,8 +1,11 @@
 const Journey = require('../models/journeyModel.js')
+const User = require('../models/userModel.js')
 
 
 const postJourney = async(req,res) =>{
   try{
+    
+    console.log('body',req.body)
     // const { imageCover, name, startDate, endDate, sharingSetting, editSetting, participants} = req.body
     const newJourney = await Journey.create(req.body)
     console.log(newJourney)
@@ -18,11 +21,23 @@ const postJourney = async(req,res) =>{
   }
 }
 
+const getMyAllJourneys = async(req,res) =>{
+  try{
+    const journey = await User.findById(req.user._id).populate('journeys')
+    console.log(journey)
+    res.status(200).json({
+      status: 'success',
+      journeys: journey.journeys
+    })
+  }catch(error){
+    console.log(error)
+  }
+}
+
 
 const getJourney = async(req,res) =>{
   try{
     const journey = await Journey.findById(req.params.id)
-    console.log(journey)
     res.status(200).json({
       status: 'success',
       journey
@@ -38,4 +53,4 @@ const getJourney = async(req,res) =>{
 
 
 
-module.exports = { postJourney,getJourney }
+module.exports = { postJourney,getJourney, getMyAllJourneys }

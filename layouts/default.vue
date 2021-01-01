@@ -22,7 +22,6 @@ export default {
     ...mapGetters('auth',['isAuthOpen']),
     ...mapGetters('journey',['isCreateJourneyShow']),
     ...mapGetters(['mobileSideMenuShow','activePage','pageShow'])
-    
   },
   methods:{
     ...mapMutations('auth',['setUserLogin'])

@@ -9,16 +9,28 @@
           </div>
         </div>
         <h1 class="mt-20px text-14px font-semibold">Journey Name</h1>
-        <input class="mt-10px" type="text" v-model="journeyName">
+        <input placeholder="Paris" required class="mt-10px" type="text" v-model="journeyName">
   </div>
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex'
   export default {
     data(){
       return{
-        journeyName: 'taipei'
+        journeyName: ''
       }
+    },
+    watch:{
+      journeyName(newVal){
+        this.setName(newVal)
+      }
+    },
+    methods:{
+      ...mapActions('journey',['setName'])
+    },
+    computed:{
+      ...mapGetters('journey',['journeyInfo'])
     }
   }
 </script>

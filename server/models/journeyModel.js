@@ -29,17 +29,17 @@ const journeySchema = new mongoose.Schema({
     sequence: Number
   }],
   notes:{
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Note'
   },
   editSetting: Boolean,
   sharingSetting: Boolean,
   createdBy:{
-    type: mongoose.Schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
   participants: [{
-    type: mongoose.schema.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
   expenses:[{
@@ -49,18 +49,18 @@ const journeySchema = new mongoose.Schema({
     },
     date: {
       type: Date,
-      default: Date.now().getDate()
+      default: Date.now()
     },
     category:{
       type: String,
       default: 'transportation'
     },
     paidBy:{
-      type: mongoose.Schema.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
     sharedBy:[{
-      type: mongoose.Schema.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     }],
     amount:{
@@ -78,7 +78,7 @@ const journeySchema = new mongoose.Schema({
 
 
 
-journeySchema.pre('/^find/', function(next){
+journeySchema.pre(/^find/, function(next){
   this.populate({
     path: 'createdBy',
     select: '-password -passwordChangedAt'

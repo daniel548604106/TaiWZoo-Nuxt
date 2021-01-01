@@ -2,20 +2,28 @@
   import JourneyCard from '@/components/journey/JourneyCard.vue'
 
   export default {
+    props:{
+      pastJourney:{
+        type: Array,
+        default: []
+      }
+    },
     components:{
       JourneyCard
     },
     data(){
       return{
-        journeyData: [], 
+        
       }
     }
   }
 </script>
 <template>
-  <div class="h-full flex items-center justify-center transform -translate-y-20px">
-      <div v-if="journeyData.length" class="w-full max-w-600 mx-auto">
-        <JourneyCard :img="img" /> 
+  <div class="h-full w-full   transform -translate-y-20px">
+      <div v-if="pastJourney.length" class=" w-full max-w-600 mx-auto">
+        <div v-for="journey in pastJourney" :key="journey.id" class="mb-20px">
+          <JourneyCard :journey="journey" /> 
+        </div>
       </div>
       <div v-else class="mt-80px sm:mt-20px flex flex-col items-center">
         <img src="~/assets/images/trip.svg" alt="">

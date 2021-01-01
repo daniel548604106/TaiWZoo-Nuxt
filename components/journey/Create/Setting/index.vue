@@ -28,9 +28,10 @@
       }
     },
     methods:{
-      ...mapActions('journey',['toggleCreateJourney']),
-      complete(){
+      ...mapActions('journey',['toggleCreateJourney','postJourneyData']),
+      async complete(){
         console.log('completed')
+        await this.postJourneyData()
         this.toggleCreateJourney()
         // post data
         // close create popup

@@ -6,33 +6,46 @@
         type: Object,
         default: ({})
       }
+    },
+    computed:{
+      totalDays(){
+        return this.journey.startDate - this.journey.endDate
+      },
+      startingDate(){
+        return this.journey.startDate.split('T')[0]
+      },
+      backgroundCover(){
+        return this.journey.imageCover || require('~/assets/images/paris.png')
+      }
     }
   }
 </script>
 <template>
-    <div :style="{ backgroundImage: `url(${journey.img})` }" class="card rounded-10px w-full max-w-500 h-200px relative">
-      <div class="w-full absolute top-0 z-4 flex items-center justify-between">
-        <div class="flex items-center">
-          <img :src="journey.img" alt="">
-          <img v-for="participant in journey.participants" :key="participant.id" :src="participant.avatar" alt="">
-        </div>
+  <nuxt-link :to="`/journey/${journey._id}`">
+    <div :style="{ backgroundImage: `url(${backgroundCover} )` }" class="card relative">
+      <div class="text-white absolute top-5% flex w-full items-center justify-between px-15px  z-4 ">
+        <img :src="journey.createdBy.avatar " class="w-24px h-24px border border-white rounded-1/2" alt="">
         <div>
-          <font-awesome-icon :icon="['fas','share-alt']" />
+          <font-awesome-icon class="mr-15px"  :icon="['fas','share-alt']" />
           <font-awesome-icon :icon="['fas','ellipsis-v']" />
         </div>
       </div>
-      <div class="absolute bottom-20px left-20px">
-        <h1>{{journey.title}}</h1>
-        <h2>{{journey.startingDate}} {{journey.totalDays}}days</h2>
+      <div class="text-white w-full absolute bottom-10% px-20px">
+        <h1 class="w-1/2 truncate">{{journey.name}}</h1>
+        <p class="text-10px">{{startingDate}} {{totalDays}}days</p>
       </div>
 
     </div>
+
+
+  </nuxt-link>
 
 </template>
 
 <style lang="postcss" scoped>
   .card{
-    @apply w-full h-auto relative;
+    @apply rounded-10px w-full max-w-500;
+    padding-top:60%;
     background-size: cover ;
     background-position:center;
     background-repeat:no-repeat;

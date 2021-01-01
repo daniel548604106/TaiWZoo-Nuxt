@@ -1,11 +1,12 @@
 
 <script>
+  import { mapGetters,mapActions } from 'vuex'
   export default {
     data(){
       return{
         selectedDate: {
            start: null, // From the beginning of time
-          end: new Date() // Until today
+            end: null
         },
          attrs: [
         {
@@ -19,16 +20,36 @@
           dates: new Date(),
           color: 'yellow',
           container: false
-          
-          
+ 
         },
       ],
       }
+    },
+    computed:{
+      ...mapGetters('journey',['journeyInfo']),
+      totalDays(){
+        return (this.selectedDate.end - this.selectedDate.start)/ (60*1000*60*24) +1
+      },
+    
+    },
+    watch:{
+      selectedDate(){
+        this.setDate({totalDays:this.totalDays, startDate: this.selectedDate.start, endDate: this.selectedDate.end})
+      }
+    },
+    methods:{
+      ...mapActions('journey',['setDate'])
     }
   }
 </script>
 <template>
   <div class="w-full px-15px">
+    <div>
+      {{selectedDate}}
+    </div>
+    <div>
+      {{totalDays}}
+    </div>
     <div class="mx-auto flex items-center justify-center">
       <no-ssr>
         <v-date-picker
@@ -41,6 +62,7 @@
           v-model="selectedDate"
           :min-date="new Date()"
           show-caps
+          locale="zh-tw"
         />
       </no-ssr>
     </div>
