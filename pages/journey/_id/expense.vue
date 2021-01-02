@@ -12,7 +12,13 @@
     },
     data(){
       return{
-          showCalculator:false
+          showCalculator:false,
+          backgroundImage: ''
+      }
+    },
+    computed:{
+      backgroundCover(){
+        return this.backgroundImage || require('~/assets/images/paris.png')
       }
     },
     methods:{
@@ -25,19 +31,19 @@
 <template>
   <div class="w-full">
     <div class="relative " >
-      <div class="relative expense-bg" style="'backgroundImage': url('~/assets/images/paris.png')">
+      <div class="relative expense-bg" :style="{ backgroundImage: `url(${backgroundCover} )` }">
         <div class="absolute w-full top-0 left-0">
         <Header />
       </div>
-      <div class="absolute text-center top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2">
-        <h1 class="text-26px">$27000</h1>
+      <div  class="text-white font-semibold absolute text-center top-1/2 transform -translate-y-1/2 left-1/2 -translate-x-1/2">
+        <h1 class="text-32px">$27,000</h1>
         <h2 class="text-18px">Romantic Paris</h2>
         <p class="text-12px">
           <span>4 people</span> Created Dec 2020  
         </p>
       </div>
       </div>
-      <div class="w-full px-10px">
+      <div class="w-full">
         <FilterBar/>
       </div>
       <div class="w-full">
@@ -63,5 +69,10 @@
   .expense-bg{
     padding-top: 60%;
     width: 100%;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position: center;
   }
+
+ 
 </style>

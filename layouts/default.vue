@@ -26,6 +26,15 @@ export default {
   methods:{
     ...mapMutations('auth',['setUserLogin'])
   },
+  watch:{
+    isCreateJourneyShow(){
+      if(this.isCreateJourneyShow){
+       document.body.style.overflow = 'hidden';
+      }else{
+        document.body.style.overflow = 'scroll';
+      }
+    }
+  },
   mounted(){
     if(Cookie.get('auth')){
       this.setUserLogin()

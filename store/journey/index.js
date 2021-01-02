@@ -1,11 +1,13 @@
-import { apiGetJourneyData, apiPostJourneyData } from '@/api'
+import { apiGetAllMyJourneys, apiGetJourneyData, apiPostJourneyData } from '@/api'
 import Cookie from 'js-cookie'
+import { getAllMyJourneys } from '~/api/journeyRequest'
 export const state = () =>{
   return{
     isCreateJourneyShow: false,
     journeyStep: 'destination',
     attractionSearchInput: '',
-    journeyInfo:{}
+    journeyInfo:{},
+    allJourneys: []
   }
 }
 
@@ -13,6 +15,7 @@ export const state = () =>{
 
 export const mutations = {
   toggleCreateJourney(state){
+    console.log('toggle')
     state.isCreateJourneyShow = !state.isCreateJourneyShow
   },
   proceedTo(state,payload){
@@ -34,7 +37,11 @@ export const mutations = {
   },
   clearData(state){
     state.journeyInfo = {}
+  },
+  setAllJourneys(state,payload){
+    state.allJourneys = payload
   }
+
 }
 export const actions = {
   toggleCreateJourney({commit}){
@@ -60,7 +67,11 @@ export const actions = {
     console.log(state.journeyInfo)
     const {data} = await apiPostJourneyData(state.journeyInfo)
     commit('clearData')
-    commit('toggleCreateJourney')
+  },
+  async getAllJourneys({commit}){
+    const { data} = await apiGetAllMyJourneys()
+    console.log(data)
+    commit('setAllJourneys',data.journeys)
   },
   async getJourneyData(id){
     const { data } = await apiGetJourneyData(id)
@@ -79,5 +90,8 @@ export const getters = {
   },
   journeyInfo(state){
     return state.journeyInfo
+  },
+  allJourneys(state){
+    return state.allJourneys
   }
 }

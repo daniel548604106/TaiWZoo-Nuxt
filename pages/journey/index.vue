@@ -21,25 +21,23 @@
       }
     },
     computed:{
-      ...mapGetters('journey',['journeyInfo']),
+      ...mapGetters('journey',['journeyInfo','allJourneys']),
       ongoingJourney(){
         // const data = this.journeys.filter(journey =>  journey.endDate > new Date().getTime())
-        return this.journeys.filter(el => new Date(el.endDate).getTime()  > new Date().getTime())
+        return this.allJourneys.filter(el => new Date(el.endDate).getTime()  > new Date().getTime())
       },
       pastJourney(){
-        return this.journeys.filter(el => new Date(el.endDate).getTime()  < new Date().getTime())
+        return this.allJourneys.filter(el => new Date(el.endDate).getTime()  < new Date().getTime())
       }
     },  
     methods:{
-      ...mapActions('journey',['toggleCreateJourney']),
+      ...mapActions('journey',['toggleCreateJourney','getAllJourneys']),
       changeTab(tab){
         this.activeTab = tab
       }
     },
     async mounted(){
-      const { data } =  await apiGetAllMyJourneys()
-      console.log(data)
-      this.journeys = data.journeys
+      await this.getAllJourneys()
     }
   }
 </script>
@@ -49,7 +47,7 @@
       <MobileHeader :title="'My Journey'"/>
     </div>
     <div class=" px-20px w-full">
-      <div class="tabs sm:mt-20px sm:mb-50px mt-80px mb-50px">
+      <div class="tabs sticky top-0 py-10px z-6 bg-white sm:mt-20px sm:mb-50px mt-80px mb-50px">
         <ul>
           <li @click="changeTab('ongoing')" :class="['tab','text-20px',{ active: activeTab === 'ongoing'}]">Ongoing/Future</li>
           <li  @click="changeTab('past')" :class="['tab','text-20px',{ active: activeTab === 'past'}]">Past Journey</li>
@@ -59,7 +57,7 @@
         <Ongoing :ongoingJourney="ongoingJourney"  v-if="activeTab === 'ongoing'"  />
         <Past :pastJourney="pastJourney" v-else />
       </div>
-      <div @click="toggleCreateJourney" class="w-full max-w-325 mx-auto absolute bottom-50px left-1/2 transform -translate-x-1/2 ">
+      <div @click="toggleCreateJourney" class="w-full max-w-325 mx-auto fixed bottom-100px left-1/2 transform -translate-x-1/2 ">
         <Button :text="'Create My Journey'"  />
       </div>
     </div>

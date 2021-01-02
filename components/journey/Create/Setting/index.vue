@@ -28,10 +28,11 @@
       }
     },
     methods:{
-      ...mapActions('journey',['toggleCreateJourney','postJourneyData']),
+      ...mapActions('journey',['toggleCreateJourney','postJourneyData','getAllJourneys']),
       async complete(){
         console.log('completed')
         await this.postJourneyData()
+        await this.getAllJourneys()
         this.toggleCreateJourney()
         // post data
         // close create popup
@@ -45,7 +46,8 @@
   }
 </script>
 <template>
-  <div class="relative h-100vh bg-white">
+  <div class="fixed h-100vh top-0  bg-white">
+    <div class="relative">
     <div>
       <Header :title="'Journey Setting'" :icon1="'chevron-left'" :to="'date'"/>
     </div>
@@ -63,6 +65,8 @@
           <Button  :text="'Complete'" />
         </div>
       </div>
+      
+    </div>
     </div>
   </div>
 </template>

@@ -2,18 +2,24 @@
   export default {
     data(){
       return{
-        oweMoney: true
+        oweMoney: true,
+        expenses: ''
+      }
+    },
+    computed:{
+      totalExpense(){
+        return this.expenses || 0
       }
     }
   }
 </script>
 <template>
-  <div class="w-full flex items-center py-10px justify-between">
+  <div class="w-full flex items-center px-10px py-10px justify-between">
     <div class="flex items-center">
       <select class="mr-5px text-12px day-select" name="day" id="day">
         <option value="">ALL</option>
       </select>
-      <select class="category-select text-12px" name="category" id="category">
+      <select class="category-select bg-white text-12px" name="category" id="category">
         <option value="">
           123123
         </option>
@@ -21,7 +27,7 @@
     </div>
     <div class="flex flex-col justify-center items-end">
       <p v-if="oweMoney" class="text-10px">(You owe $2,700)</p>
-      <p class="text-10px">Total <span class="text-16px font-semibold">27000</span> </p>
+      <p class="text-10px">Total <span class="text-16px font-semibold">{{totalExpense}}</span> </p>
     </div>
   </div>
 </template>

@@ -47,10 +47,10 @@
      <BasicInfo :journeyInfo="journeyInfo"/>
    </div>
    <div class="sticky top-50px bg-white">
-     <Tabs :changeTab="changeTab" :activeTab="activeTab"/>
+     <Tabs :changeTab="changeTab" :journeyInfo="journeyInfo" :activeTab="activeTab"/>
    </div>
    <div v-if="activeTab === 1">
-     <Schedule/>
+     <Schedule :journeyInfo="journeyInfo"/>
    </div>
    <div v-if="activeTab === 2">
      <Location/>
