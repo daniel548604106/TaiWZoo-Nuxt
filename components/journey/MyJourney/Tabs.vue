@@ -59,7 +59,7 @@
     <div class="flex items-center ">
       <span class="text-10px mr-6px">Total Expense</span>
       <nuxt-link :to="`/journey/${$route.params.id}/expense`">
-        <div @click="toExpense" class="rounded-20px text-12px border py-4px px-10px">
+        <div class="rounded-20px text-12px border py-4px px-10px">
         $ 0
         </div>
       </nuxt-link>

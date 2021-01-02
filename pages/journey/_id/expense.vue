@@ -1,4 +1,5 @@
 <script>
+  import { mapActions } from 'vuex'
   import Header from '@/components/journey/_id/Expense/Header.vue'
   import FilterBar from '@/components/journey/_id/Expense/FilterBar.vue'
   import List from '@/components/journey/_id/Expense/List.vue'
@@ -22,9 +23,7 @@
       }
     },
     methods:{
-      toggleCalculator(){
-        this.showCalculator = !this.showCalculator
-      }
+      ...mapActions('journey',['toggleCalculator']),
     }
   }
 </script>
@@ -50,7 +49,7 @@
         <List/>
       </div>
       <div class="absolute bottom-0 z-6 w-full">
-        <Calculator :toggleCalculator="toggleCalculator" :showCalculator="showCalculator"/>
+        <Calculator/>
       </div>
       <div class="flex fixed bottom-50px left-1/2 transform -translate-x-1/2 -translate-y-1/2 items-center justify-center">
         <button @click="toggleCalculator" class="flex items-center text-white bg-vue-main rounded-30px py-10px px-15px ">

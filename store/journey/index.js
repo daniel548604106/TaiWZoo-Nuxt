@@ -7,7 +7,8 @@ export const state = () =>{
     journeyStep: 'destination',
     attractionSearchInput: '',
     journeyInfo:{},
-    allJourneys: []
+    allJourneys: [],
+    showCalculator: false
   }
 }
 
@@ -40,6 +41,9 @@ export const mutations = {
   },
   setAllJourneys(state,payload){
     state.allJourneys = payload
+  },
+  toggleCalculator(state){
+    state.showCalculator = !state.showCalculator
   }
 
 }
@@ -76,6 +80,9 @@ export const actions = {
   async getJourneyData(id){
     const { data } = await apiGetJourneyData(id)
     console.log(data)
+  },
+  toggleCalculator({commit}){
+    commit('toggleCalculator')
   }
 }
 export const getters = {
@@ -93,5 +100,8 @@ export const getters = {
   },
   allJourneys(state){
     return state.allJourneys
+  },
+  showCalculator(state){
+    return state.showCalculator
   }
 }

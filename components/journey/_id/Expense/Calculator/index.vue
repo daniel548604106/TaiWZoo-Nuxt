@@ -1,4 +1,5 @@
 <script>
+  import {mapActions , mapGetters} from 'vuex'
   import Panel from '@/components/journey/_id/Expense/Calculator/Panel.vue'
   import Category from '@/components/journey/_id/Expense/Calculator/Category.vue'
   import Selection from '@/components/journey/_id/Expense/Calculator/Selection.vue'
@@ -8,19 +9,15 @@
       Category,
       Selection
     },
-    props:{
-      showCalculator:{
-        type: Boolean,
-        default: false
-      },
-      toggleCalculator:{
-        type:Function,
-        default: () => {}
-      }
-    },
     data(){
       return {
       }
+    },
+    computed:{
+      ...mapGetters('journey',['showCalculator'])
+    },
+    methods:{
+      ...mapActions('journey',['toggleCalculator'])
     }
   }
 </script>
