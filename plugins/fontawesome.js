@@ -12,6 +12,7 @@ import {
   faLock,
   faPlus,
   faTimes,
+  faCamera,
   faBookmark,
   faPlay,
   faEquals,
@@ -67,6 +68,7 @@ import {
   faMapMarkedAlt,
   faDivide,
   faPencilAlt,
+  faFolderPlus
 } from '@fortawesome/free-solid-svg-icons'
 // far
 import { faBookmark as farBookmark, faCreditCard,   
@@ -89,9 +91,11 @@ library.add(
   faBell,
   faPlus,
   faChevronLeft,
+  faFolderPlus,
   faDivide,
   faQuestionCircle,
   faCheck,
+  faCamera,
   faPencilAlt,
   faUserCircle,
   faEnvelope,

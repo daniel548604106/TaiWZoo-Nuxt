@@ -40,6 +40,9 @@
       id++;
       this.list.push({ name: "Juan " + id, id, text: "" });
       },
+      addNote(){
+        this.$router.push(`/journey/${this.$route.params.id}/note`)
+      },
       addExpense(){
         this.$router.push(`/journey/${this.$route.params.id}/expense`)
         this.toggleCalculator()
@@ -58,7 +61,7 @@
           </div>
       </draggable>
     <div class="btn flex items-center justify-around px-20px mt-20px">
-      <div class="flex items-center">
+      <div @click="addNote" class="flex items-center">
         <span class="mr-5px text-vue-green">Note</span>
         <div class="text-vue-green border-vue-green border w-26px h-26px rounded-1/2 flex items-center justify-center">
           <font-awesome-icon  :icon="['fas','pencil-alt']" />
