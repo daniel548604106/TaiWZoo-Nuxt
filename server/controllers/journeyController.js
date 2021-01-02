@@ -1,5 +1,44 @@
 const Journey = require('../models/journeyModel.js')
 const User = require('../models/userModel.js')
+const Note = require('../models/noteModel.js')
+const multer = require('multer')
+
+const multerStorage = multer.diskStorage({
+  destination: (req,file, cb) => {
+    cb(null, 'server/uploads/img/journey')
+  },
+  filename: (req,file,cb) => {
+    const ext = file.mimetype.split('/')[1]
+    cb(null, `journey-${req.params.id}-${Date.now()}.${ext}`)
+  }
+})
+
+// Only Allow Image file to be uploaded
+const multerFilter = (req,file,cb) => {
+  if(file.mimetype.startsWith('image')){
+    cb(null, true)
+  }else{
+    cb('Not an image, please upload only images', false)
+  }
+} 
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter
+})
+
+const uploadImage = upload.single('image')
+const postNote = async(req,res) => {
+  try{
+    console.log(req.file)
+    const journey = await Journey.findById(req.params.id)
+    console.log('journey',journey)
+    console.log(req.body)
+  }catch(error){
+    console.log(error)
+  }
+}
+
 
 
 const postJourney = async(req,res) =>{
@@ -53,4 +92,4 @@ const getJourney = async(req,res) =>{
 
 
 
-module.exports = { postJourney,getJourney, getMyAllJourneys }
+module.exports = { postJourney, postNote, getJourney, getMyAllJourneys , uploadImage}

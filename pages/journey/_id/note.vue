@@ -25,6 +25,7 @@
       }
     },
     methods:{
+      ...mapActions('journey',['postNote']),
       removeAt(idx) {
         this.contents.splice(idx, 1);
       },
@@ -33,6 +34,12 @@
       },
       addImage(){
         this.contents.push({ type: 'image', image: ''})
+      },
+      complete(){
+        const id = this.$route.params.id
+        const data = { title: this.title, contents: this.contents}
+        this.postNote({id ,data})
+        console.log('complete')
       }
     }
   }
@@ -41,9 +48,8 @@
   <div class="w-full relative h-100vh ">
     <div class="relative mb-100px" >
       <div>
-        <Header />
+        <Header :complete="complete"/>
       </div>
-      {{contents}}
       <div class="px-15px">
         <div class="mt-10px">
           <h2 class="mb-20px font-semibold text-18px">Note Picture</h2>
@@ -56,7 +62,7 @@
         </div>
         <div class="mt-20px">
           <h2 class="uppercase font-semibold text-14px">Title</h2>
-          <input type="text" placeholder="REQUIRED" required class="mt-10px">
+          <input type="text" v-model="title" placeholder="REQUIRED" required class="mt-10px">
           <h2 class="uppercase font-semibold text-14px mt-10px">Content</h2>
            <draggable  v-model="contents"  @start="drag=true" @end="drag=false">
              <div v-for="(content, idx) in contents" :key="content.id" >

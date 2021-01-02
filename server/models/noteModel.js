@@ -9,15 +9,11 @@ const noteSchema = new mongoose.Schema({
     type:String,
     required: [true, 'Please give your note a title']
   },
-  content:[{
-    sequence:{
-      type: Number,
-      default: 0
-    },
+  contents:[{
     text: {
       type:String,
     },
-    photos:[{
+    image:[{
       type:String,
     }] 
   }]

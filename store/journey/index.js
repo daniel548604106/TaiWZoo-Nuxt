@@ -1,6 +1,5 @@
-import { apiGetAllMyJourneys, apiGetJourneyData, apiPostJourneyData } from '@/api'
+import { apiGetAllMyJourneys ,apiGetJourneyData, apiPostJourneyData, apiPostNote } from '@/api'
 import Cookie from 'js-cookie'
-import { getAllMyJourneys } from '~/api/journeyRequest'
 export const state = () =>{
   return{
     isCreateJourneyShow: false,
@@ -44,6 +43,9 @@ export const mutations = {
   },
   toggleCalculator(state){
     state.showCalculator = !state.showCalculator
+  },
+  postNote(){
+    console.log('hi')
   }
 
 }
@@ -80,6 +82,12 @@ export const actions = {
   async getJourneyData(id){
     const { data } = await apiGetJourneyData(id)
     console.log(data)
+  },
+  async postNote({commit},payload){
+    const { id ,data} = payload
+    await apiPostNote(id,data)
+    commit('postNote')
+   console.log('posted note')
   },
   toggleCalculator({commit}){
     commit('toggleCalculator')
