@@ -27,13 +27,31 @@ const upload = multer({
   fileFilter: multerFilter
 })
 
-const uploadImage = upload.single('image')
+const uploadImage = upload.single('coverImage')
+
+
+const getNote = async (req,res) =>{
+  try{
+    const id = req.params.note_id
+    const note = await Note.findById(id)
+    console.log(note)
+  }catch(error){
+    console.log(error)
+  }
+}
+
 const postNote = async(req,res) => {
   try{
+    if(req.file){
+      req.body.imageCover = req.file.filename
+    } 
+    console.log(req.body)
     console.log(req.file)
+    const newNote = await Note.create({imageCover: req.body.imageCover, title: 'Paring', journey: req.params.id})
+    console.log(newNote)
+    const id = newNote._id
     const journey = await Journey.findById(req.params.id)
     console.log('journey',journey)
-    console.log(req.body)
   }catch(error){
     console.log(error)
   }
@@ -76,7 +94,7 @@ const getMyAllJourneys = async(req,res) =>{
 
 const getJourney = async(req,res) =>{
   try{
-    const journey = await Journey.findById(req.params.id)
+    const journey = await Journey.findById(req.params.id).populate({ path: 'notes'})
     res.status(200).json({
       status: 'success',
       journey
@@ -92,4 +110,4 @@ const getJourney = async(req,res) =>{
 
 
 
-module.exports = { postJourney, postNote, getJourney, getMyAllJourneys , uploadImage}
+module.exports = { postJourney, postNote, getJourney, getMyAllJourneys , uploadImage, getNote}

@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 
 
 const noteSchema = new mongoose.Schema({
+  journey:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Journey'
+  },
   imageCover: {
     type:String,
   },
@@ -17,7 +21,23 @@ const noteSchema = new mongoose.Schema({
       type:String,
     }] 
   }]
+},{
+  timestamps: true,
+  toJSON: {virtuals:true},
+  toObject: {virtuals: true},
+  id:false
 })
+
+
+// noteSchema.pre(/^find/, function(next){
+//   this.populate({
+//     path: 'journey',
+//     select: '-createdBy'
+//   })
+//   next()
+// })
+
+
 
 const Note = mongoose.model('Note', noteSchema)
 

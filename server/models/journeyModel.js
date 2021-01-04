@@ -28,10 +28,6 @@ const journeySchema = new mongoose.Schema({
     day: Number,
     sequence: Number
   }],
-  notes:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Note'
-  },
   editSetting: Boolean,
   sharingSetting: Boolean,
   createdBy:{
@@ -74,8 +70,19 @@ const journeySchema = new mongoose.Schema({
     }
   }]
 
-})
+},{
+  timestamps: true,
+  toJSON: {virtuals:true},
+  toObject: {virtuals: true},
+  id:false
+}
+)
 
+journeySchema.virtual('notes',{
+  ref: 'Note',
+  foreignField: 'journey',
+  localField: '_id'
+})
 
 
 journeySchema.pre(/^find/, function(next){
