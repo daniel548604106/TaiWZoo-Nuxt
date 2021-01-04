@@ -16,12 +16,21 @@
         account: this.user.account || '',
         website: this.user.website || '',
         biography: this.user.biography || '',
-        gender: this.user.gender || ''
+        gender: this.user.gender || '',
+        avatar: '',
+        avatarPreview: ''
+      }
+    },
+    computed:{
+      avatarImage(){
+        return  this.avatarPreview || require('~/assets/images/profile.svg')
       }
     },
     methods:{
       ...mapActions('account',['patchMeData']),
       async save(){
+        const form = new FormData()
+
         const data = {
           name: this.name,
           account: this.account,
@@ -29,10 +38,35 @@
           biography: this.biography,
           gender: this.gender
         }
+        if(this.avatar){
+          form.append('avatar', this.avatar)
+        }
+
+        form.append('name', this.name)
+        form.append('account', this.account)
+        form.append('website', this.website)
+        form.append('biography', this.biography)
+        form.append('gender', this.gender)
+        console.log('form', form)
         console.log('checkDataa', data)
-        await this.patchMeData(data)
+        await this.patchMeData(form)
         
+      },
+      uploadUserPhoto(e){
+        const image = e.target.files[0];
+        console.log('image',image)
+        this.avatar = image
+        const reader = new FileReader();
+        console.log('image=>', image)
+        reader.onload = e =>{
+          this.avatarPreview = e.target.result;
+          console.log(this.avatar);
+        };
+        reader.readAsDataURL(image);
       }
+    },
+    mounted(){
+      this.avatarPreview  = this.user.avatar
     }
   }
 </script>
@@ -40,11 +74,15 @@
   <div class="flex items-center flex-col border rounded-10px py-10px">
       <div class="flex items-center">
         <div class="w-100px mr-20px flex items-center justify-end">
-        <img src="~/assets/images/avatar.png" alt="">
+        <div class="w-60px h-60px rounded-1/2 bg-cover" :style="{backgroundImage: `url(${avatarImage})`}" alt="">
+        </div>
         </div>
       <div class="w-300px">
         <h2>{{user.account}}</h2>
-        <button class="text-vue-main">Change Profile Picture</button>
+        <label for="avatar" class="text-vue-main cursor-pointer">
+          <div>Change Profile Picture</div>
+          <input class="hidden" type="file" id="avatar" accept="image" @change="uploadUserPhoto">
+        </label>
       </div>
     </div>
     <div class="flex items-center">
@@ -79,6 +117,11 @@
 </template>
 
 <style lang="postcss" scoped>
+
+.bg-cover{
+  background:no-repeat center;
+  background-size: cover;
+}
 
 h1{
   @apply mr-20px w-100px text-right

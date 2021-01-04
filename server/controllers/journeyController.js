@@ -61,9 +61,11 @@ const postNote = async(req,res) => {
 
 const postJourney = async(req,res) =>{
   try{
-    
     console.log('body',req.body)
-    // const { imageCover, name, startDate, endDate, sharingSetting, editSetting, participants} = req.body
+    if(req.body.image){
+      req.body.imageCover = req.body.image
+    }
+    req.body.createdBy = req.user._id
     const newJourney = await Journey.create(req.body)
     console.log(newJourney)
     res.status(200).json({

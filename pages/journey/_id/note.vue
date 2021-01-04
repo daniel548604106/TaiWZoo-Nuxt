@@ -37,9 +37,32 @@
       },
       complete(){
         const id = this.$route.params.id
-        const data = { title: this.title, contents: this.contents}
-        this.postNote({id ,data})
+        let data = new FormData();
+        data.append('file', this.backgroundImage); 
+        const note = { title: this.title, contents: this.contents}
+        this.postNote({id ,data , note})
         console.log('complete')
+      },
+      uploadPhoto(e){
+        const idx = e.target.dataset.index
+        const image = e.target.files[0]
+        console.log('clicked')
+        const reader = new FileReader()
+        reader.onload = e =>{
+          this.contents[idx].image = e.target.result;
+        }
+        reader.readAsDataURL(image)
+      },
+      uploadImageCover(e){
+        console.log('e',e)
+        const image = e.target.files[0];
+        const reader = new FileReader();
+        console.log('image=>', image)
+        reader.onload = e =>{
+          this.backgroundImage = e.target.result;
+          console.log(this.backgroundImage);
+        };
+        reader.readAsDataURL(image);
       }
     }
   }
@@ -54,10 +77,13 @@
         <div class="mt-10px">
           <h2 class="mb-20px font-semibold text-18px">Note Picture</h2>
           <div class="bg-cover  relative rounded-20px" :style="{backgroundImage: `url(${backgroundCover})`}">
-            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white">
-              <font-awesome-icon  :icon="['fas','camera']" />
-              <p class="mt-10px">Customize Note Picture</p>
-            </div>
+            <label action="">
+              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white">
+                <font-awesome-icon  :icon="['fas','camera']" />
+                <p class="mt-10px">Customize Note Picture</p>
+              </div>
+              <input class="hidden" type="file" accept="image" @change="uploadImageCover">
+            </label>
           </div>
         </div>
         <div class="mt-20px">
@@ -77,7 +103,14 @@
                 </div>
               </div>
               <div v-if="content.type === 'image'">
-                <div :style="{ backgroundImage: `url(${content.image || require('~/assets/images/note-bg.png')})`}" class="bg-cover relative mt-20px rounded-20px">
+                <div :style="{ backgroundImage: `url(${contents[idx].image})`}" class="bg-cover relative mt-20px rounded-20px">
+                  <label action="">
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white">
+                      <font-awesome-icon  :icon="['fas','camera']" />
+                      <p class="mt-10px"><span v-if="contents[idx].image">Change</span> <span v-else>Customize</span> Note Picture</p>
+                    </div>
+                    <input class="hidden" type="file" accept="image/*" @change="uploadPhoto($event)" :data-index="idx">
+                  </label>  
                   <font-awesome-icon :icon="['fas','grip-lines']" class="absolute top-10px left-10px text-white" />
                   <div class="absolute flex items-center justify-center top-10px right-10px rounded-1/2 bg-vue-main w-26px h-26px">
                     <font-awesome-icon  class="text-white"  @click="removeAt(idx)" :icon="['fas','trash']" />  

@@ -8,9 +8,6 @@
       }
     },
     computed:{
-      totalDays(){
-        return this.journey.startDate - this.journey.endDate
-      },
       startingDate(){
         return this.journey.startDate.split('T')[0]
       },
@@ -32,7 +29,7 @@
       </div>
       <div class="text-white w-full absolute bottom-10% px-20px">
         <h1 class="w-1/2 truncate">{{journey.name}}</h1>
-        <p class="text-10px">{{startingDate}} {{totalDays}}days</p>
+        <p class="text-10px">{{startingDate}} ({{journey.totalDays}} days)</p>
       </div>
 
     </div>

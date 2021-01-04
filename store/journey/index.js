@@ -1,5 +1,6 @@
 import { apiGetAllMyJourneys ,apiGetJourneyData, apiPostJourneyData, apiPostNote } from '@/api'
 import Cookie from 'js-cookie'
+import { totalDay } from '~/lib/tool'
 export const state = () =>{
   return{
     isCreateJourneyShow: false,
@@ -35,6 +36,9 @@ export const mutations = {
   setName(state,payload){
     state.journeyInfo.name = payload
   },
+  setNewJourneyImage(state,payload){
+    state.journeyInfo.imageCover = payload
+  },
   clearData(state){
     state.journeyInfo = {}
   },
@@ -66,12 +70,21 @@ export const actions = {
   setName({commit},payload){
     commit('setName',payload)
   },
+  setNewJourneyImage({commit},payload){
+    commit('setNewJourneyImage',payload)
+  },
   async postJourneyData({commit,state}){
-    const id = JSON.parse(Cookie.get('userInfo')).user._id
-    console.log('id',id)
-    state.journeyInfo.createdBy = id
-    console.log(state.journeyInfo)
-    const {data} = await apiPostJourneyData(state.journeyInfo)
+    const { totalDays , startDate, endDate ,name, imageCover} = state.journeyInfo
+    const form = new FormData()
+    if(imageCover){
+      form.append('imageCover', imageCover)
+    }
+    form.append('totalDays',totalDays)
+    form.append('startDate', startDate)
+    form.append('endDate', endDate)
+    form.append('name', name)
+    const {data} = await apiPostJourneyData(form)
+    console.log(data)
     commit('clearData')
   },
   async getAllJourneys({commit}){
@@ -84,8 +97,8 @@ export const actions = {
     console.log(data)
   },
   async postNote({commit},payload){
-    const { id ,data} = payload
-    await apiPostNote(id,data)
+    const { id ,data , note} = payload
+    await apiPostNote(id,data, note)
     commit('postNote')
    console.log('posted note')
   },

@@ -1,5 +1,6 @@
 <script>
   import { mapActions, mapGetters } from 'vuex'
+  import Cookies from 'js-cookie'
   import SideMenu from '@/components/global/SideMenu.vue'
   export default {
     components:{
@@ -7,11 +8,15 @@
     },
     data(){
       return{
-        isSideMenuOpen: false
+        isSideMenuOpen: false,
+        avatar: ''
       }
     },
     computed:{
-      ...mapGetters('auth',['isUserLoggedIn'])
+      ...mapGetters('auth',['isUserLoggedIn']),
+      avatarImage(){
+        return this.avatar || require('~/assets/images/profile.svg')
+      }
     },
     methods:{
       ...mapActions('auth',['toggleAuthOpen']),
@@ -26,6 +31,10 @@
         }
       }
     },
+    mounted(){
+      console.log('hi',JSON.parse(Cookies.get('userInfo')).user.avatar)
+      this.avatar = JSON.parse(Cookies.get('userInfo')).user.avatar
+    }
   }
 </script>
 <template>
@@ -48,7 +57,8 @@
         <div class="relative flex items-center" v-if="isUserLoggedIn">
           <div class="cursor-pointer mr-20px" >
             <nuxt-link to="/profile">
-             <img src="~/assets/images/profile.svg" alt="">
+             <div class="w-30px h-30px rounded-1/2 bg-cover" :style="{backgroundImage: `url(${avatarImage})`}" alt="">
+             </div>
             </nuxt-link>
           </div>
           <div @click="toggleSideMenu" class="cursor-pointer">
@@ -70,6 +80,10 @@
 
 
 <style lang="postcss" scoped>
+  .bg-cover{
+    background: no-repeat center;
+    background-size: cover;
+  }
   .tabs li{
     @apply p-10px rounded-10px
   }

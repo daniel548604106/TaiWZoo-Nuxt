@@ -30,7 +30,9 @@
         </div>
       </div>
       <div class="relative">
-        <img v-if="user.avatar" :src="user.avatar" class="rounded-1/2 w-100px h-100px" alt="">
+        <div v-if="user.avatar" class="bg-cover rounded-1/2 w-100px h-100px" :style="{backgroundImage: `url(${user.avatar})`}">
+        
+        </div>
         <img v-else src="~/assets/images/profile.svg" class="border rounded-1/2 w-100px h-100px" alt="">
         <div class="absolute bottom-5px right-5px w-20px h-20px flex items-center justify-center  rounded-1/2 bg-white border-vue-main">
           <font-awesome-icon :icon="['fas','plus']" class="text-vue-main w-12px h-12px" /> 
@@ -41,6 +43,9 @@
 </template>
 
 
-<style lang="scss" scoped>
-
+<style lang="postcss" scoped>
+.bg-cover{
+  background: no-repeat center;
+  background-size: cover;
+}
 </style>

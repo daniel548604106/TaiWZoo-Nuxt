@@ -1,5 +1,5 @@
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
    import Header from '@/components/journey/Create/Header.vue'
   import Button from '@/components/global/Button.vue'
   import Overlay from '@/components/global/Overlay.vue'
@@ -27,10 +27,18 @@
         toggleSwitch: false
       }
     },
+    computed:{
+      ...mapGetters('journey',['journeyInfo'])
+    },
     methods:{
       ...mapActions('journey',['toggleCreateJourney','postJourneyData','getAllJourneys']),
       async complete(){
         console.log('completed')
+        console.log(this.journeyInfo)
+        if(!this.journeyInfo.name){
+          console.log('empty')
+          return
+        }
         await this.postJourneyData()
         await this.getAllJourneys()
         this.toggleCreateJourney()

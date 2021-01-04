@@ -8,6 +8,9 @@ const journeySchema = new mongoose.Schema({
   imageCover:{
     type: String,
   },
+  totalDays:{
+    type: Number,
+  },
   startDate:{
     type: Date,
     required: [true, 'Please write your starting date.']
