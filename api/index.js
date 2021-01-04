@@ -2,7 +2,7 @@ import { getMyData,patchMyData } from './meRequest'
 import {getTransportationData} from './transportRequest'
 import { userSignup,userLogin } from './userRequest'
 import { getAllUsers } from './adminRequest'
-import {getJourneyData, postJourneyData, getAllMyJourneys ,postNote}  from './journeyRequest'
+import {getJourneyData, postJourneyData, getAllMyJourneys ,postNote , postExpense}  from './journeyRequest'
 // meRequest
 export const apiGetMyData = getMyData
 export const apiPatchMyData = patchMyData
@@ -23,3 +23,4 @@ export const apiPostJourneyData = postJourneyData
 export const apiGetJourneyData = getJourneyData
 export const apiGetAllMyJourneys = getAllMyJourneys
 export const apiPostNote = postNote
+export const apiPostExpense = postExpense

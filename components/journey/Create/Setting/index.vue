@@ -40,6 +40,7 @@
           return
         }
         await this.postJourneyData()
+      
         await this.getAllJourneys()
         this.toggleCreateJourney()
         // post data

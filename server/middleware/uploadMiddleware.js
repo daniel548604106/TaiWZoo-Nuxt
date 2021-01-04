@@ -23,7 +23,8 @@ const multerFilter = (req,file,cb) => {
 
 const upload = multer({
   storage: multerStorage,
-  fileFilter: multerFilter
+  fileFilter: multerFilter,
+  limits: { fieldSize: 25 * 1024 * 1024 }
 })
 
 const uploadUserPhoto = upload.single('avatar')

@@ -1,9 +1,23 @@
 <script>
   export default {
+    props:{
+      postExpense:{
+        type: Function,
+        default: () => {}
+      }
+    },
     data(){
       return{
         paymentType : 'cash',
-        current: ''
+        current: '',
+      }
+    },
+    watch:{
+      current(newVal){
+        this.$emit('amount', newVal); 
+      },
+      paymentType(newVal){
+        this.$emit('paymentType', newVal)
       }
     },
     methods:{
@@ -62,7 +76,7 @@
        </div>
       <div @click="append(0)">0</div>
       <div @click="dot">.</div>
-      <div>
+      <div @click="postExpense">
         <font-awesome-icon class="text-vue-main" :icon="['fas','check']" />
       </div>
       <div>

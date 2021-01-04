@@ -1,6 +1,7 @@
 const Journey = require('../models/journeyModel.js')
 const User = require('../models/userModel.js')
 const Note = require('../models/noteModel.js')
+const Expense = require('../models/expenseModel.js')
 const multer = require('multer')
 
 const multerStorage = multer.diskStorage({
@@ -24,7 +25,8 @@ const multerFilter = (req,file,cb) => {
 
 const upload = multer({
   storage: multerStorage,
-  fileFilter: multerFilter
+  fileFilter: multerFilter,
+  limits: { fieldSize: 25 * 1024 * 1024 }
 })
 
 const uploadImage = upload.single('coverImage')
@@ -58,6 +60,31 @@ const postNote = async(req,res) => {
 }
 
 
+const postExpense = async(req,res) => {
+  try{
+    const id = req.params.id
+    console.log('id', id)
+    const newExpense = await Expense.create({journey: id})
+    console.log(newExpense)
+  }catch(error){
+    console.log(error)
+  }
+}
+
+const patchExpense = async(req, res) =>{
+  try{
+    console.log(newExpense._id)
+    const expense = await Expense.findById(newExpense._id)
+    expense.expenses.push(req.body)
+    await expense.save()
+    console.log(expense)
+    console.log(req.params.id)
+    console.log(req.body)
+  }catch(error){
+    console.log(error)
+  }
+}
+
 
 const postJourney = async(req,res) =>{
   try{
@@ -67,6 +94,10 @@ const postJourney = async(req,res) =>{
     }
     req.body.createdBy = req.user._id
     const newJourney = await Journey.create(req.body)
+    const journey_id = newJourney._id
+    // Add Expense
+    const newExpense = await Expense.create({journey: journey_id})
+    console.log(newExpense)
     console.log(newJourney)
     res.status(200).json({
       status: 'success',
@@ -96,7 +127,7 @@ const getMyAllJourneys = async(req,res) =>{
 
 const getJourney = async(req,res) =>{
   try{
-    const journey = await Journey.findById(req.params.id).populate({ path: 'notes'})
+    const journey = await (await Journey.findById(req.params.id).populate({ path: 'notes', model: Note}).populate({path: 'expenses', model: Expense}))
     res.status(200).json({
       status: 'success',
       journey
@@ -112,4 +143,4 @@ const getJourney = async(req,res) =>{
 
 
 
-module.exports = { postJourney, postNote, getJourney, getMyAllJourneys , uploadImage, getNote}
+module.exports = { postJourney, postNote, getJourney, getMyAllJourneys , uploadImage, getNote, postExpense , patchExpense}

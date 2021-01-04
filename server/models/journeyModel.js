@@ -40,38 +40,38 @@ const journeySchema = new mongoose.Schema({
   participants: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }],
-  expenses:[{
-    title:{
-      type: String,
-      default: 'lunch'
-    },
-    date: {
-      type: Date,
-      default: Date.now()
-    },
-    category:{
-      type: String,
-      default: 'transportation'
-    },
-    paidBy:{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
-    sharedBy:[{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }],
-    amount:{
-      type: Number
-    },
-    paymentMethod:{
-      type: String,
-    },
-    currency:{
-      type: String
-    }
   }]
+  // expenses:[{
+  //   title:{
+  //     type: String,
+  //     default: 'lunch'
+  //   },
+  //   date: {
+  //     type: Date,
+  //     default: Date.now()
+  //   },
+  //   category:{
+  //     type: String,
+  //     default: 'transportation'
+  //   },
+  //   paidBy:{
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'User'
+  //   },
+  //   sharedBy:[{
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'User'
+  //   }],
+  //   amount:{
+  //     type: Number
+  //   },
+  //   paymentMethod:{
+  //     type: String,
+  //   },
+  //   currency:{
+  //     type: String
+  //   }
+  // }]
 
 },{
   timestamps: true,
@@ -83,6 +83,12 @@ const journeySchema = new mongoose.Schema({
 
 journeySchema.virtual('notes',{
   ref: 'Note',
+  foreignField: 'journey',
+  localField: '_id'
+})
+
+journeySchema.virtual('expenses',{
+  ref: 'Expense',
   foreignField: 'journey',
   localField: '_id'
 })

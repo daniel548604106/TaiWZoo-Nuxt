@@ -4,7 +4,7 @@
      props:{
       journeyInfo:{
         type: Object,
-        default: {}
+        default: ({})
       }
     },
     computed:{
