@@ -2,6 +2,9 @@ export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'TaiWZ002',
+    script:[{
+      src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places`
+    }],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -15,7 +18,8 @@ export default {
   env: {
     TRANSPORTATION_ID: process.env.TRANSPORTATION_ID,
     TRANSPORTATION_KEY: process.env.TRANSPORTATION_KEY,
-    MAPBOX_TOKEN: process.env.MAPBOX_TOKEN
+    MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
+    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY
   },
   
 

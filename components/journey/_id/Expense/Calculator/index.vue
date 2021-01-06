@@ -1,10 +1,20 @@
 <script>
-  import { apiPostExpense } from '@/api'
+  import { apiPatchExpense } from '@/api'
   import {mapActions , mapGetters} from 'vuex'
   import Panel from '@/components/journey/_id/Expense/Calculator/Panel.vue'
   import Category from '@/components/journey/_id/Expense/Calculator/Category.vue'
   import Selection from '@/components/journey/_id/Expense/Calculator/Selection.vue'
   export default {
+    props:{
+      expenses:{
+        type: Array,
+        default: []
+      },
+      getExpenseData:{
+        type: Function,
+        default: () => {}
+      }
+    },
     components:{
       Panel,
       Category,
@@ -31,11 +41,14 @@
       updatePaymentType(value){
         this.paymentType = value
       },
-      async postExpense(){
+      async patchExpense(){
         console.log('expense')
-        const expenseDetail = { name: this.name, amount: this.amount, paymentType: this.paymentType, currency: this.currency , category: this.category, date: this.date }
+        const expense_id = this.expenses[0]._id
+        console.log(expense_id)
+        const expenseDetail = { expense_id, name: this.name, amount: this.amount, paymentType: this.paymentType, currency: this.currency , category: this.category, date: this.date }
         const journey_id = this.$route.params.id
-        const {data} = await apiPostExpense(journey_id,expenseDetail)
+        const {data} = await apiPatchExpense(journey_id, expenseDetail)
+        this.getExpenseData()
         console.log(data)
       }
     },
@@ -73,7 +86,7 @@
       <Category/>
     </div>
     <div>
-      <Panel @amount="updateAmount" @paymentType="updatePaymentType" :postExpense="postExpense"/>
+      <Panel @amount="updateAmount" @paymentType="updatePaymentType" :patchExpense="patchExpense"/>
     </div>
     </div>
 

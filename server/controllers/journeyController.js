@@ -73,13 +73,21 @@ const postExpense = async(req,res) => {
 
 const patchExpense = async(req, res) =>{
   try{
-    console.log(newExpense._id)
-    const expense = await Expense.findById(newExpense._id)
-    expense.expenses.push(req.body)
-    await expense.save()
+    const {expense_id,...data} = req.body    
+    console.log('body',req.body)
+    const expense = await Expense.findById(expense_id)
     console.log(expense)
-    console.log(req.params.id)
-    console.log(req.body)
+    expense.expenseList.push(data)
+    await expense.save()
+    res.status(200).json({
+      status: 'success',
+      expense
+    })
+    console.log(expense)
+    // await expense.save()
+    // console.log(expense)
+    // console.log(req.params.id)
+    // console.log(req.body)
   }catch(error){
     console.log(error)
   }

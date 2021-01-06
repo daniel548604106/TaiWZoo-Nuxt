@@ -1,4 +1,5 @@
 <script>
+  import { apiGetJourneyData} from '@/api'
   import { mapActions } from 'vuex'
   import Header from '@/components/journey/_id/Expense/Header.vue'
   import FilterBar from '@/components/journey/_id/Expense/FilterBar.vue'
@@ -14,7 +15,8 @@
     data(){
       return{
           showCalculator:false,
-          backgroundImage: ''
+          backgroundImage: '',
+          expenses: []
       }
     },
     computed:{
@@ -24,6 +26,15 @@
     },
     methods:{
       ...mapActions('journey',['toggleCalculator']),
+      async getExpenseData(){
+        const id = this.$route.params.id
+         const {data} = await apiGetJourneyData(id)
+         this.expenses = data.journey.expenses
+        console.log('data =>' ,data.journey.expenses)
+      }
+    },
+    async mounted(){
+      await this.getExpenseData()      
     }
   }
 </script>
@@ -46,10 +57,10 @@
         <FilterBar/>
       </div>
       <div class="w-full">
-        <List/>
+        <List :expenses="expenses"/>
       </div>
       <div class="absolute bottom-0 z-6 w-full">
-        <Calculator/>
+        <Calculator :expenses="expenses" :getExpenseData="getExpenseData" />
       </div>
       <div class="flex fixed bottom-50px left-1/2 transform -translate-x-1/2 -translate-y-1/2 items-center justify-center">
         <button @click="toggleCalculator" class="flex items-center text-white bg-vue-main rounded-30px py-10px px-15px ">

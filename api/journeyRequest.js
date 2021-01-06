@@ -20,5 +20,10 @@ export const postExpense = async(id) =>{
 }
 
 
+export const patchExpense = async(id, expense_id) =>{
+  return await axios.patch(`/api/v1/journey/${id}/expense`, expense_id)
+}
+
+
 
 

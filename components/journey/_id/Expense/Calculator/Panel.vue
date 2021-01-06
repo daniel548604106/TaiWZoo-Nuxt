@@ -1,7 +1,8 @@
 <script>
+  import { mapActions } from 'vuex'
   export default {
     props:{
-      postExpense:{
+      patchExpense:{
         type: Function,
         default: () => {}
       }
@@ -21,6 +22,7 @@
       }
     },
     methods:{
+      ...mapActions('journey',['toggleCalculator']),
       append(num){
         this.current = `${this.current}` + num
       },
@@ -31,6 +33,10 @@
         if( this.current.indexOf('.') === -1){
           this.current = this.current.concat('.')
         }
+      },
+      check(){
+        this.patchExpense()
+        this.toggleCalculator()
       }
     }
   }
@@ -76,7 +82,7 @@
        </div>
       <div @click="append(0)">0</div>
       <div @click="dot">.</div>
-      <div @click="postExpense">
+      <div @click="check">
         <font-awesome-icon class="text-vue-main" :icon="['fas','check']" />
       </div>
       <div>
