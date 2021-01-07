@@ -9,7 +9,11 @@
     },
     data(){
       return{
-        searchInput: ''
+        searchInput: '',
+        searchLat: null,
+        searchLng: null,
+        infoName: null,
+        infoImage: null
       }
     },
     methods:{
@@ -23,13 +27,24 @@
     },
     mounted(){
 
-      new google.maps.places.Autocomplete(
+      let autocomplete = new google.maps.places.Autocomplete(
         document.getElementById('autocomplete'),{
           bounds: new google.maps.LatLngBounds(
             new google.maps.LatLng(45.421231,-75.223111)
           )
         }
       )
+
+      autocomplete.addListener("place_changed",() => {
+        let place = autocomplete.getPlace()
+        let newCoords = place.geometry.location
+        this.searchLat = newCoords.lat()
+        this.searchLng = newCoords.lng()
+        this.infoImage = place.photos[0].html_attributions[0]
+        this.infoName = place.name
+        console.log(place)
+        console.log(place.photos[0].html_attributions[0])
+      })
     }
   }
 </script>
@@ -42,7 +57,7 @@
     </div>
     <div class="mt-10px mb-200px" >
       <!-- <Mapbox/> -->
-      <GoogleMap/>
+      <GoogleMap  :searchLng="searchLng" :searchLat="searchLat" :infoImage="infoImage" />
     </div>
     <div class="text-white">
       @mapbox
