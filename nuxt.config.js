@@ -20,7 +20,15 @@ export default {
     TRANSPORTATION_ID: process.env.TRANSPORTATION_ID,
     TRANSPORTATION_KEY: process.env.TRANSPORTATION_KEY,
     MAPBOX_TOKEN: process.env.MAPBOX_TOKEN,
-    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY
+    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
+    REDIRECT_URI: process.env.REDIRECT_URI,
+    AUTH_LINE_CLIENT_ID: process.env.AUTH_LINE_CLIENT_ID,
+    GOOGLE_AUTH_CLIENT_ID: process.env.GOOGLE_AUTH_CLIENT_ID,
+    GOOGLE_AUTH_CLIENT_SECRET: process.env.GOOGLE_AUTH_CLIENT_SECRET
+  },
+  render: {
+
+    resourceHints: false,
   },
   
 

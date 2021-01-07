@@ -1,4 +1,7 @@
 <script>
+  import Cookie from 'js-cookie'
+  import qs from 'query-string'
+  import { redirectUri , config} from '@/lib/oauth2.js'
   import { mapActions} from 'vuex'
   export default {
     data(){
@@ -15,6 +18,25 @@
       },
       async login(){
         await this.userLogin({email:this.email,password: this.password})
+      },
+      oAuthLogin(provider){
+
+        // const type = provider
+        //  console.log(provider)
+        // const query = qs.stringify(config[type])
+        // // return console.log(query)
+        const url = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${process.env.AUTH_LINE_CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&state=login&scope=profile%20openid%20email&nonce=09876xyz`
+        Cookie.set('oauth_redirect_uri', { url: this.$route.fullPath })
+        window.location.href = url
+        // window.location.href = redirectUri(type, query)
+      },
+      googleOAuthLogin(provider){
+        const type = provider
+         console.log(provider)
+        const query = qs.stringify(config[type])
+        Cookie.set('oauth_redirect_uri', { url: this.$route.fullPath })
+        window.location.href = redirectUri(type, query)
+        // return console.log(query)
       }
     },
   }
@@ -23,14 +45,15 @@
 <template>
   <div class="w-full flex flex-col items-center justify-center px-15px h-full">
     <div class="social-button">
-      <div class="social-icon google">
+      <div @click="googleOAuthLogin('google')" class="social-icon google">
         <img src="~/assets/images/google.svg" alt="">
       </div>
-      <div class="social-icon facebook">
+      <div @click="oAuthLogin('facebook')" class="social-icon facebook">
         <img src="~/assets/images/fb.svg" alt="">
       </div>
-      <div class="social-icon apple">
-        <img src="~/assets/images/apple.svg" alt="">
+      <div @click="oAuthLogin('line')" class="social-icon apple">
+        <h2 class="text-vue-green">Line</h2>
+        <!-- <img src="~/assets/images/apple.svg" alt=""> -->
       </div>
     </div>
     <div class="flex items-center justify-between my-20px">
@@ -63,7 +86,7 @@
 }
 
 .social-icon{
-  @apply w-80px h-60px flex items-center justify-center bg-white p-10px rounded-10px
+  @apply w-80px h-60px flex items-center justify-center cursor-pointer bg-white p-10px rounded-10px
 }
 .social-icon:not(:last-of-type){
    @apply  mr-20px

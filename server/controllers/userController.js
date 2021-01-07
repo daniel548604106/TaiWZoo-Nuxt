@@ -2,7 +2,9 @@ const User = require('../models/userModel')
 const generateToken = require('../lib/generateToken')
 const multer = require('multer')
 const ImageKit = require("imagekit");
-
+const axios = require('axios')
+const qs = require('query-string')
+const jwt_decode = require('jwt-decode')
 const getMyData = async(req,res) =>{
   try{
     const user = await User.findById(req.user._id)
@@ -62,8 +64,6 @@ const uploadToImageKit = async (req,res, next) => {
   }catch(error){
     console.log(error)
   }
-
- 
 }
 
 
@@ -141,5 +141,32 @@ const userLogin = async(req,res,next) =>{
   }
 }
 
+const oAuthLogin = async(req,res ,next) => {
+  try{
+    const code = req.body.provider
+    const google_url = 'https://oauth2.googleapis.com/token'
+    let content = { code ,client_id : process.env.GOOGLE_AUTH_CLIENT_ID, client_secret: process.env.GOOGLE_AUTH_CLIENT_SECRET, redirect_uri: process.env.REDIRECT_URI, grant_type: 'authorization_code'}
+    let sending = qs.stringify(content)
+    const {data} = await axios.post(google_url ,sending,{
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+      }
+  })
+  const { access_token, expires_in } = data
+  const userInfo = jwt_decode(data.id_token)
+  res.status(200).json({
+    status: 'success',
+    data:{
+      access_token,
+      expires_in,
+      userInfo
+    }
+  })
+    console.log(req.body)
+  }catch(error){
+    console.log(error)
+  }
+}
 
-module.exports = { userSignup, userLogin ,getMyData , patchMyData,uploadUserPhoto, uploadToImageKit }
+
+module.exports = { userSignup, oAuthLogin, userLogin ,getMyData , patchMyData,uploadUserPhoto, uploadToImageKit }

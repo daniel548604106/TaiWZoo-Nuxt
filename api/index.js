@@ -3,6 +3,7 @@ import {getTransportationData} from './transportRequest'
 import { userSignup,userLogin } from './userRequest'
 import { getAllUsers } from './adminRequest'
 import {getJourneyData, postJourneyData, getAllMyJourneys ,postNote , postExpense , patchExpense}  from './journeyRequest'
+import { postOAuthLogin} from './oauthRequest.js'
 // meRequest
 export const apiGetMyData = getMyData
 export const apiPatchMyData = patchMyData
@@ -25,3 +26,7 @@ export const apiGetAllMyJourneys = getAllMyJourneys
 export const apiPostNote = postNote
 export const apiPostExpense = postExpense
 export const apiPatchExpense = patchExpense
+
+
+// oauthRequest
+export const apiPostOAuthLogin  = postOAuthLogin

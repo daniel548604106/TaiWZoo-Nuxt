@@ -32,8 +32,10 @@
       }
     },
     mounted(){
-      console.log('hi',JSON.parse(Cookies.get('userInfo')).user.avatar)
-      this.avatar = JSON.parse(Cookies.get('userInfo')).user.avatar
+      if(Cookies.get('userInfo')){
+        this.avatar = JSON.parse(Cookies.get('userInfo')).user.avatar
+      }
+    
     }
   }
 </script>

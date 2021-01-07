@@ -1,6 +1,8 @@
 <script>
+// import jwt_decode from "jwt-decode";
 import Cookie from 'js-cookie'
-import { mapGetters, mapMutations } from 'vuex'
+import axios from 'axios'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import Header from '@/components/global/Header.vue'
 import Auth from '@/components/auth/index.vue'
 import Overlay from '@/components/global/Overlay.vue'
@@ -24,7 +26,29 @@ export default {
     ...mapGetters(['mobileSideMenuShow','activePage','pageShow'])
   },
   methods:{
-    ...mapMutations('auth',['setUserLogin'])
+    ...mapMutations('auth',['setUserLogin']),
+    ...mapActions('auth',['oAuthLogin']),
+    checkOAuth(){
+       console.log('testing')
+     let code ;
+     console.log($nuxt)
+      // If the user is not authenticated
+      if(!$nuxt.context.query.code) return 
+
+      code  = $nuxt.context.query.code 
+      this.oAuthLogin(code)
+      
+      if (Cookie.get('oauth_redirect_uri')) {
+            $nuxt.context.app.router.push({
+              path: JSON.parse(Cookie.get('oauth_redirect_uri')).url
+            })
+            console.log('success')
+            console.log(JSON.parse(Cookie.get('oauth_redirect_uri')).url)
+        } else {
+          $nuxt.context.app.router.push({ path: '/' })
+          console.log('false')
+      }
+    }
   },
   watch:{
     isCreateJourneyShow(){
@@ -36,9 +60,12 @@ export default {
     }
   },
   mounted(){
+    this.checkOAuth()
+    console.log('helo',this.$nuxt)
     if(Cookie.get('auth')){
       this.setUserLogin()
     }
+    
     console.log('checking',this.mobileSideMenuShow)
   }
 }

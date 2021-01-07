@@ -1,18 +1,13 @@
 <template>
   <div>
-404 error
-
-<button @click="backToHome">Back To Main Page</button>
+    Sorry, something went wrong 
+    <nuxt-link to="/">Back To Home</nuxt-link>
   </div>
 </template>
 
 <script>
   export default {
-    methods:{
-      backToHome(){
-        this.$router.push('/')
-      }
-    }
+    
   }
 </script>
 

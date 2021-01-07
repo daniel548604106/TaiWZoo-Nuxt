@@ -58,7 +58,7 @@
   }
 </script>
 <template>
-<div>
+<div class="hidden">
   <div class="bg-white rounded-t-xl w-150px text-center mx-auto py-5px ">
     <h1 class="text-vue-main text-26px font-semibold italic">Daily</h1>
   </div>

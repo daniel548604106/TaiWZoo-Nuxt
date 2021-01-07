@@ -1,4 +1,5 @@
-import {apiUserSignup , apiUserLogin} from '@/api'
+import {apiUserSignup , apiUserLogin, apiPostOAuthLogin} from '@/api'
+
 import Cookie from 'js-cookie'
 import { userSignup } from '~/api/userRequest'
 export const state = () =>({
@@ -55,6 +56,14 @@ export const actions ={
     }catch(error){
       console.log(error)
     }
+  },
+  async oAuthLogin({commit},payload){
+    console.log('hi')
+    const {data} = await apiPostOAuthLogin(payload)
+    console.log('oauth',data)
+    commit('setUserLogin')
+    commit('toggleAuthOpen')
+
   },
   toggleAuthType({commit},payload){
     commit('toggleAuthType',payload)
