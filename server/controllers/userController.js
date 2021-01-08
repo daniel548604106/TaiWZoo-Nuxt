@@ -2,6 +2,7 @@ const User = require('../models/userModel')
 const generateToken = require('../lib/generateToken')
 const multer = require('multer')
 const ImageKit = require("imagekit");
+const Account = require('../models/accountModel')
 const axios = require('axios')
 const qs = require('query-string')
 const jwt_decode = require('jwt-decode')
@@ -145,24 +146,43 @@ const oAuthLogin = async(req,res ,next) => {
   try{
     const code = req.body.provider
     const google_url = 'https://oauth2.googleapis.com/token'
-    let content = { code ,client_id : process.env.GOOGLE_AUTH_CLIENT_ID, client_secret: process.env.GOOGLE_AUTH_CLIENT_SECRET, redirect_uri: process.env.REDIRECT_URI, grant_type: 'authorization_code'}
+    let content = { access_type: 'offline' ,code ,client_id : process.env.GOOGLE_AUTH_CLIENT_ID, client_secret: process.env.GOOGLE_AUTH_CLIENT_SECRET, redirect_uri: process.env.REDIRECT_URI, grant_type: 'authorization_code'}
     let sending = qs.stringify(content)
     const {data} = await axios.post(google_url ,sending,{
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
       }
   })
-  const { access_token, expires_in } = data
-  const userInfo = jwt_decode(data.id_token)
+  console.log(data)
+  const { access_token, expires_in ,id_token} = data
+  const detail = (jwt_decode(id_token))
+  console.log(id_token)
+  console.log(detail)
+  // Check if Social Account Exists
+  const account = await Account.findOne({email: detail.email})
+  if(account){
+    return res.status(200).json({
+      status: 'success',
+      access_token,
+      account
+    }) 
+  }
+
+  // Create New Account
+  const newAccount = await Account.create({
+    name: detail.name,
+    avatar: detail.picture,
+    provider: 'google',
+    email: detail.email,
+    token: id_token,
+    access_token : access_token
+  })
+
   res.status(200).json({
     status: 'success',
-    data:{
-      access_token,
-      expires_in,
-      userInfo
-    }
+    access_token,
+    account:newAccount
   })
-    console.log(req.body)
   }catch(error){
     console.log(error)
   }

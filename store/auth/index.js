@@ -60,9 +60,13 @@ export const actions ={
   async oAuthLogin({commit},payload){
     console.log('hi')
     const {data} = await apiPostOAuthLogin(payload)
+    console.log(data)
+    console.log(data.account.token)
+    Cookie.set('auth', data.account.token)
+    console.log('auth', Cookie.get('auth'))
+    Cookie.set('userInfo', JSON.stringify(data.account))
     console.log('oauth',data)
     commit('setUserLogin')
-    commit('toggleAuthOpen')
 
   },
   toggleAuthType({commit},payload){

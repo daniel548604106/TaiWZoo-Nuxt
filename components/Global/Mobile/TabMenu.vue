@@ -14,7 +14,7 @@
     },
     mounted(){
       if((Cookies.get('userInfo'))){
-        this.avatar = JSON.parse(Cookies.get('userInfo')).user.avatar
+        this.avatar = JSON.parse(Cookies.get('userInfo')).user.avatar || JSON.parse(Cookies.get('userInfo')).avatar
       }
     }
   }
@@ -26,7 +26,7 @@
           <li ><nuxt-link to="/explore"><img src="~/assets/images/explore.svg" alt=""></nuxt-link></li>
           <li ><nuxt-link to="/journey"><img src="~/assets/images/journey.svg" alt=""></nuxt-link></li>
           <li ><nuxt-link to="/social"><img src="~/assets/images/social.svg" alt=""></nuxt-link></li>
-          <li ><nuxt-link to="/profile"><div class="w-30px h-30px rounded-1/2 bg-cover" :style="{backgroundImage: `url(${avatarImage})`}" alt="">
+          <li ><nuxt-link to="/profile"><div class="rounded-1/2 bg-cover" :style="{backgroundImage: `url(${avatarImage})`}" alt="">
              </div></nuxt-link></li>
       </ul>
   </div>
@@ -34,6 +34,8 @@
 
 <style lang="postcss" scoped>
 .bg-cover{
+    width: 30px;
+    padding-top: 100%;
     background: no-repeat center;
     background-size: cover;
   }

@@ -1,20 +1,34 @@
 const jwt = require('jsonwebtoken')
+const jwtDecode = require('jwt-decode')
 const User = require('../models/userModel')
+const Account = require('../models/accountModel')
 const protect = async (req,res,next) =>{
   try{
     console.log('protected')
+    console.log(req.body, req.headers)
     let token  = ''
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
       token = req.headers.authorization.split(' ')[1]
+      console.log(token)
+       // Check Social Account
+       const email = (jwtDecode(token).email)
+       console.log('email',email)
+       const account = await Account.findOne({ email})
+       console.log(account)
+       if(account){
+         console.log(account)
+         req.user = account
+         return next()
+       }
       //JWT will return jwt malformed If Token is null/Invalid-Signature that is being passed to jwt.verifty function
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = await jwt.verify(token, process.env.JWT_SECRET);
       // find that user
-      const user = await User.findById(decoded.id)
+      const user = await User.findById(decoded.id) 
       if(user){
         req.user = user
+        next() //middleware passed
       }
-    }
-    next() //middleware passed
+    }  
   }catch(error){
     res.status(403).json({
       message: 'token invalid'
