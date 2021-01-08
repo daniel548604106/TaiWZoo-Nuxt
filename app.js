@@ -1,6 +1,14 @@
 const express = require('express')
 const app = express()
 const port = 3001
+const https = require('https');
+const fs = require('fs');
+
+const httpsOptions = {
+  key: fs.readFileSync("./localhost+2-key.pem"),
+  cert: fs.readFileSync("./localhost+2.pem")
+};
+
 const cors = require('cors')
 const router = express.Router()
 const connectDB = require('./server/lib/db.js')
@@ -30,6 +38,8 @@ app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/admin', adminRoutes)
 app.use('/api/v1/journey', journeyRoutes)
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`)
+// })
+
+https.createServer(httpsOptions, app).listen(3001);

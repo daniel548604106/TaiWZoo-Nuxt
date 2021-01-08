@@ -5,8 +5,7 @@ import { userSignup } from '~/api/userRequest'
 export const state = () =>({
   authType: 'login',
   isAuthOpen: false,
-  isUserLoggedIn: false,
-  
+  isUserLoggedIn: false,  
 })
 
 export const mutations ={
@@ -58,7 +57,6 @@ export const actions ={
     }
   },
   async oAuthLogin({commit},payload){
-    console.log('hi')
     const {data} = await apiPostOAuthLogin(payload)
     console.log(data)
     console.log(data.account.token)

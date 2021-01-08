@@ -12,7 +12,7 @@
       }
     },
     methods: {
-      ...mapActions('auth',['toggleAuthType','userLogin']),
+      ...mapActions('auth',['toggleAuthType','userLogin','setOAuthProvider']),
       toggleShowPassword(){
         this.showPassword = !this.showPassword
       },
@@ -20,23 +20,15 @@
         await this.userLogin({email:this.email,password: this.password})
       },
       oAuthLogin(provider){
-
-        // const type = provider
-        //  console.log(provider)
-        // const query = qs.stringify(config[type])
-        // // return console.log(query)
-        const url = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${process.env.AUTH_LINE_CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&state=login&scope=profile%20openid%20email&nonce=09876xyz`
-        Cookie.set('oauth_redirect_uri', { url: this.$route.fullPath })
-        window.location.href = url
-        // window.location.href = redirectUri(type, query)
-      },
-      googleOAuthLogin(provider){
+        Cookie.set('OAuthProvider', provider)
         const type = provider
-         console.log(provider)
         const query = qs.stringify(config[type])
         Cookie.set('oauth_redirect_uri', { url: this.$route.fullPath })
         window.location.href = redirectUri(type, query)
-        // return console.log(query)
+        // const url = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${process.env.AUTH_LINE_CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&state=login&scope=profile%20openid%20email&nonce=09876xyz`
+        // Cookie.set('oauth_redirect_uri', { url: this.$route.fullPath })
+        // window.location.href = url
+        // window.location.href = redirectUri(type, query)
       }
     },
   }
@@ -45,7 +37,7 @@
 <template>
   <div class="w-full flex flex-col items-center justify-center px-15px h-full">
     <div class="social-button">
-      <div @click="googleOAuthLogin('google')" class="social-icon google">
+      <div @click="oAuthLogin('google')" class="social-icon google">
         <img src="~/assets/images/google.svg" alt="">
       </div>
       <div @click="oAuthLogin('facebook')" class="social-icon facebook">

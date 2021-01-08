@@ -21,7 +21,7 @@ export default {
     PopupPage
   },
   computed:{
-    ...mapGetters('auth',['isAuthOpen']),
+    ...mapGetters('auth',['isAuthOpen','OAuthProvider']),
     ...mapGetters('journey',['isCreateJourneyShow']),
     ...mapGetters(['mobileSideMenuShow','activePage','pageShow'])
   },
@@ -33,10 +33,10 @@ export default {
      let code ;
      console.log($nuxt)
       // If the user is not authenticated
-      if(!$nuxt.context.query.code) return 
-
+      if(!$nuxt.context.query.code) return
+      const provider = Cookie.get('OAuthProvider') // 取得 oAuth provider
       code  = $nuxt.context.query.code 
-      this.oAuthLogin(code)
+      this.oAuthLogin({code, provider})
       
       if (Cookie.get('oauth_redirect_uri')) {
             $nuxt.context.app.router.push({

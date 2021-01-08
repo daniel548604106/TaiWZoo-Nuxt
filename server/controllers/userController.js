@@ -144,19 +144,31 @@ const userLogin = async(req,res,next) =>{
 
 const oAuthLogin = async(req,res ,next) => {
   try{
-    const code = req.body.provider
-    const google_url = 'https://oauth2.googleapis.com/token'
-    let content = { access_type: 'offline' ,code ,client_id : process.env.GOOGLE_AUTH_CLIENT_ID, client_secret: process.env.GOOGLE_AUTH_CLIENT_SECRET, redirect_uri: process.env.REDIRECT_URI, grant_type: 'authorization_code'}
-    let sending = qs.stringify(content)
-    const {data} = await axios.post(google_url ,sending,{
+    const  {code, provider}  = req.body
+    let content;
+    switch(provider){
+      case 'google':
+      const google_url = 'https://oauth2.googleapis.com/token'
+      let googleParams = qs.stringify({ access_type: 'offline' ,code ,client_id : process.env.GOOGLE_AUTH_CLIENT_ID, client_secret: process.env.GOOGLE_AUTH_CLIENT_SECRET, redirect_uri: process.env.REDIRECT_URI, grant_type: 'authorization_code'})
+      const { data } = await axios.post(google_url ,googleParams,{
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-      }
-  })
-  console.log(data)
-  const { access_token, expires_in ,id_token} = data
-  const detail = (jwt_decode(id_token))
+              'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      console.log(data)
+      content = data
+      break;
+      case 'facebook':
+      console.log('fafa')
+      let facebookParams = qs.stringify({ client_id: process.env.FACEBOOK_AUTH_CLIENT_ID, redirect_uri : process.env.REDIRECT_URI, client_secret : process.env.FACEBOOK_AUTH_CLIENT_SECRET, code})
+      const facebook_url = `https://graph.facebook.com/v9.0/oauth/access_token?${facebookParams}`
+      data = await axios.get(facebook_url)
+      console.log(data)
+    }
+  console.log(content)
+  const { access_token, expires_in ,id_token} = content
   console.log(id_token)
+  const detail = (jwt_decode(id_token))
   console.log(detail)
   // Check if Social Account Exists
   const account = await Account.findOne({email: detail.email})

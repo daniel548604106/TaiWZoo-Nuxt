@@ -1,3 +1,6 @@
+import path from 'path'
+import fs from 'fs'
+
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -24,7 +27,8 @@ export default {
     REDIRECT_URI: process.env.REDIRECT_URI,
     AUTH_LINE_CLIENT_ID: process.env.AUTH_LINE_CLIENT_ID,
     GOOGLE_AUTH_CLIENT_ID: process.env.GOOGLE_AUTH_CLIENT_ID,
-    GOOGLE_AUTH_CLIENT_SECRET: process.env.GOOGLE_AUTH_CLIENT_SECRET
+    GOOGLE_AUTH_CLIENT_SECRET: process.env.GOOGLE_AUTH_CLIENT_SECRET,
+    FACEBOOK_AUTH_CLIENT_ID: process.env.FACEBOOK_AUTH_CLIENT_ID
   },
   render: {
 
@@ -38,8 +42,12 @@ export default {
     'swiper/swiper-bundle.css'
 
   ],
-
-
+  server: {
+        https: {
+          key: fs.readFileSync(path.resolve(__dirname, "localhost+2-key.pem")),
+          cert: fs.readFileSync(path.resolve(__dirname, "localhost+2.pem"))
+    }
+  },
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     {src: '~/plugins/mapbox.js', ssr: false},
