@@ -145,33 +145,72 @@ const userLogin = async(req,res,next) =>{
 const oAuthLogin = async(req,res ,next) => {
   try{
     const  {code, provider}  = req.body
-    let content;
+    let content; 
+    let access_token;
+    let name;
+    let avatar;
+    let token;
+    let email
+    const config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}
+
+    // Google
+    const google_url = 'https://oauth2.googleapis.com/token'
+    const google_params = qs.stringify({ access_type: 'offline' ,code ,client_id : process.env.GOOGLE_AUTH_CLIENT_ID, client_secret: process.env.GOOGLE_AUTH_CLIENT_SECRET, redirect_uri: process.env.REDIRECT_URI, grant_type: 'authorization_code'})
+    // Facebook
+    const facebook_url = `https://graph.facebook.com/v9.0/oauth/access_token?client_id=${process.env.FACEBOOK_AUTH_CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&client_secret=${process.env.FACEBOOK_AUTH_CLIENT_SECRET}&code=AQAF82y7q9JsHipVW0KLB0JHiWr9wvZp6CZd6w3Qg1YHKI_F6HhqPJuyLGUCZUKgsZW7tjWp8VV433C_UeCy7PMm6Zik9mkkHPyLO3Bvr-bpQGnWYJ8VtWe559JsnSXDcPIORMOU3oRGBYl94dS-9h51FWAgKG7pNmb44ZEMw5rJUs2R9VWhDmw0smwAe4Wa2eBoTNae2mNYmMMJv4F4Xj80uzsPy3Zppmy35ZpqbmL-PzhStIEKXkAoLAdl35btsllndcM_rrtTRvopWOX9jKmHbdS7diH_klF0OJ0UtMdhutGCoiiDMCBDAkninN8oM5I9xdbgTWs-ho5ijlqv-AZUVWsGklC4Pk7zuVFj1SFdZQ#_=_`
+    const facebook_params = qs.stringify({ client_id: process.env.FACEBOOK_AUTH_CLIENT_ID, redirect_uri : process.env.REDIRECT_URI, client_secret : process.env.FACEBOOK_AUTH_CLIENT_SECRET, code})
+    // Line
+    const line_url = `https://api.line.me/oauth2/v2.1/token`
+    const line_url_verify = 'https://api.line.me/oauth2/v2.1/verify'
+    const line_params = qs.stringify({
+      grant_type : 'authorization_code',
+      code,
+      redirect_uri: process.env.REDIRECT_URI,
+      client_id : process.env.AUTH_LINE_CLIENT_ID,
+      client_secret : process.env.AUTH_LINE_SECRET
+    })
+
     switch(provider){
-      case 'google':
-      const google_url = 'https://oauth2.googleapis.com/token'
-      let googleParams = qs.stringify({ access_type: 'offline' ,code ,client_id : process.env.GOOGLE_AUTH_CLIENT_ID, client_secret: process.env.GOOGLE_AUTH_CLIENT_SECRET, redirect_uri: process.env.REDIRECT_URI, grant_type: 'authorization_code'})
-      const { data } = await axios.post(google_url ,googleParams,{
-      headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-      console.log(data)
-      content = data
-      break;
-      case 'facebook':
-      console.log('fafa')
-      let facebookParams = qs.stringify({ client_id: process.env.FACEBOOK_AUTH_CLIENT_ID, redirect_uri : process.env.REDIRECT_URI, client_secret : process.env.FACEBOOK_AUTH_CLIENT_SECRET, code})
-      const facebook_url = `https://graph.facebook.com/v9.0/oauth/access_token?${facebookParams}`
-      data = await axios.get(facebook_url)
-      console.log(data)
+      case 'google':{
+        const { data } = await axios.post(google_url ,google_params,config)
+        console.log(data)
+        content = data
+        break;
+      }
+      case 'facebook':{
+        console.log('fafa')
+        const { data } = await axios.get(facebook_url)
+        console.log(data)
+        break;
+      }
+      case 'line':{
+        const { data } = await axios.post(line_url,line_params, config)
+        const { access_token, expires_in ,id_token} = data
+        
+        const res = await axios.post(line_url_verify,qs.stringify({id_token,client_id: process.env.AUTH_LINE_CLIENT_ID}),config)
+        content = res.data
+        // access_token = access_token
+        token = id_token
+        avatar = res.data.picture
+        email = res.data.email
+        name = res.data.name
+        break;
+      }
     }
   console.log(content)
-  const { access_token, expires_in ,id_token} = content
-  console.log(id_token)
-  const detail = (jwt_decode(id_token))
-  console.log(detail)
+  let detail 
+  console.log('email',email)
+
+  if(provider === 'google' || provider === 'facebook'){
+    const { access_token, expires_in ,id_token} = content
+    detail = (jwt_decode(id_token))
+    token = id_token
+    avatar = detail.picture
+    email = detail.email
+    name = detail.name
+  }
   // Check if Social Account Exists
-  const account = await Account.findOne({email: detail.email})
+  const account = await Account.findOne({email, provider})
   if(account){
     return res.status(200).json({
       status: 'success',
@@ -182,12 +221,12 @@ const oAuthLogin = async(req,res ,next) => {
 
   // Create New Account
   const newAccount = await Account.create({
-    name: detail.name,
-    avatar: detail.picture,
-    provider: 'google',
-    email: detail.email,
-    token: id_token,
-    access_token : access_token
+    name,
+    avatar,
+    provider,
+    email,
+    token,
+    access_token
   })
 
   res.status(200).json({
@@ -197,6 +236,8 @@ const oAuthLogin = async(req,res ,next) => {
   })
   }catch(error){
     console.log(error)
+    console.log(error.data)
+    console.log(error.data.error)
   }
 }
 
