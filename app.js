@@ -33,11 +33,12 @@ app.use(cors())
 const userRoutes = require('./server/routes/userRoute.js')
 const adminRoutes = require('./server/routes/adminRoute.js')
 const journeyRoutes = require('./server/routes/journeyRoute.js')
+const authRoutes = require('./server/routes/authRoute.js')
 
 app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/admin', adminRoutes)
 app.use('/api/v1/journey', journeyRoutes)
-
+app.use('/api/v1/auth',authRoutes)
 // app.listen(port, () => {
 //   console.log(`Example app listening at http://localhost:${port}`)
 // })

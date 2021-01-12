@@ -1,5 +1,5 @@
 const express = require('express')
-const router = express()
+const router = express.Router()
 const {oAuthLogin, userSignup ,userLogin ,getMyData, patchMyData, uploadUserPhoto, uploadToImageKit} = require('../controllers/userController')
 const {protect} = require('../middleware/authMiddleware')
 router.post('/signup', userSignup)

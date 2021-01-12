@@ -157,8 +157,8 @@ const oAuthLogin = async(req,res ,next) => {
     const google_url = 'https://oauth2.googleapis.com/token'
     const google_params = qs.stringify({ access_type: 'offline' ,code ,client_id : process.env.GOOGLE_AUTH_CLIENT_ID, client_secret: process.env.GOOGLE_AUTH_CLIENT_SECRET, redirect_uri: process.env.REDIRECT_URI, grant_type: 'authorization_code'})
     // Facebook
-    const facebook_url = `https://graph.facebook.com/v9.0/oauth/access_token?client_id=${process.env.FACEBOOK_AUTH_CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&client_secret=${process.env.FACEBOOK_AUTH_CLIENT_SECRET}&code=AQAF82y7q9JsHipVW0KLB0JHiWr9wvZp6CZd6w3Qg1YHKI_F6HhqPJuyLGUCZUKgsZW7tjWp8VV433C_UeCy7PMm6Zik9mkkHPyLO3Bvr-bpQGnWYJ8VtWe559JsnSXDcPIORMOU3oRGBYl94dS-9h51FWAgKG7pNmb44ZEMw5rJUs2R9VWhDmw0smwAe4Wa2eBoTNae2mNYmMMJv4F4Xj80uzsPy3Zppmy35ZpqbmL-PzhStIEKXkAoLAdl35btsllndcM_rrtTRvopWOX9jKmHbdS7diH_klF0OJ0UtMdhutGCoiiDMCBDAkninN8oM5I9xdbgTWs-ho5ijlqv-AZUVWsGklC4Pk7zuVFj1SFdZQ#_=_`
-    const facebook_params = qs.stringify({ client_id: process.env.FACEBOOK_AUTH_CLIENT_ID, redirect_uri : process.env.REDIRECT_URI, client_secret : process.env.FACEBOOK_AUTH_CLIENT_SECRET, code})
+    const facebook_params = qs.stringify({ client_id: process.env.FACEBOOK_AUTH_CLIENT_ID, redirect_uri : 'https://localhost:3000/', client_secret : process.env.FACEBOOK_AUTH_CLIENT_SECRET, code})
+    const facebook_url = `https://graph.facebook.com/v9.0/oauth/access_token?client_id=${process.env.FACEBOOK_AUTH_CLIENT_ID}&redirect_uri=https://localhost:3000/&client_secret=${process.env.FACEBOOK_AUTH_CLIENT_SECRET}&code=${code}`
     // Line
     const line_url = `https://api.line.me/oauth2/v2.1/token`
     const line_url_verify = 'https://api.line.me/oauth2/v2.1/verify'
@@ -210,29 +210,37 @@ const oAuthLogin = async(req,res ,next) => {
     name = detail.name
   }
   // Check if Social Account Exists
-  const account = await Account.findOne({email, provider})
-  if(account){
+  const user = await User.findOne({email})
+  if(user){
+    console.log('provider',provider)
+    console.log(user[provider])
+    user[provider] = { token , avatar , email, name }
+    console.log(user[provider])
+    await user.save()
     return res.status(200).json({
       status: 'success',
       access_token,
-      account
+      user
     }) 
   }
 
   // Create New Account
-  const newAccount = await Account.create({
-    name,
-    avatar,
-    provider,
+  const newUser = await User.create({
     email,
-    token,
-    access_token
+    // access_token,
+    [provider]: {
+      name,
+      avatar,
+      email,
+      token,
+      token,
+    }
   })
 
   res.status(200).json({
     status: 'success',
-    access_token,
-    account:newAccount
+    // access_token,
+    user: {email: newUser.email , [provider]:  newUser[provider]}
   })
   }catch(error){
     console.log(error)

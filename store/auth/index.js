@@ -59,8 +59,9 @@ export const actions ={
   async oAuthLogin({commit},payload){
     const {data} = await apiPostOAuthLogin(payload)
     console.log(data)
-    console.log(data.account.token)
-    Cookie.set('auth', data.account.token)
+    let provider = Cookie.get('OAuthProvider')
+    console.log(data.user[provider].token)
+    Cookie.set('auth', data.user[provider].token)
     console.log('auth', Cookie.get('auth'))
     Cookie.set('userInfo', JSON.stringify(data.account))
     console.log('oauth',data)

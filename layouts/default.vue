@@ -29,13 +29,14 @@ export default {
     ...mapMutations('auth',['setUserLogin']),
     ...mapActions('auth',['oAuthLogin']),
     checkOAuth(){
-       console.log('testing')
      let code ;
      console.log($nuxt)
       // If the user is not authenticated
       if(!$nuxt.context.query.code) return
       const provider = Cookie.get('OAuthProvider') // 取得 oAuth provider
       code  = $nuxt.context.query.code 
+      console.log(code,'hi')
+
       this.oAuthLogin({code, provider})
       
       if (Cookie.get('oauth_redirect_uri')) {
