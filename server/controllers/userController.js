@@ -224,6 +224,7 @@ const oAuthLogin = async(req,res ,next) => {
     user[provider] = { token , avatar , email, name }
     console.log(user[provider])
     await user.save()
+    console.log('saved')
     return res.status(200).json({
       status: 'success',
       access_token,
@@ -240,14 +241,14 @@ const oAuthLogin = async(req,res ,next) => {
       avatar,
       email,
       token,
-      token,
     }
   })
 
   res.status(200).json({
     status: 'success',
     // access_token,
-    user: {email: newUser.email , [provider]:  newUser[provider]}
+    user: {email: newUser.email , [provider]:  newUser[provider]},
+    token: generateToken(newUser._id)
   })
   }catch(error){
     console.log(error)

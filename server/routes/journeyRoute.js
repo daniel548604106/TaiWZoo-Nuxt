@@ -7,7 +7,7 @@ const { uploadJourneyCoverToImageKit, uploadJourneyCover } = require('../middlew
 
 
 router.route('/').post(protect, uploadJourneyCover, uploadJourneyCoverToImageKit, postJourney)
-router.get('/', protect, getMyAllJourneys)
+router.get('/', protect,getMyAllJourneys)
 router.route('/:id').get(getJourney)
 router.route('/:id/expense').post(postExpense).patch(patchExpense)
 router.route('/:id/note').post(uploadImage, postNote)
