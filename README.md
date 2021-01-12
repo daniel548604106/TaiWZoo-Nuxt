@@ -3,8 +3,9 @@
 ## 功能
 1. 登入機制
 2. 社群登入第三方串接機制(facebook, google , line)
-3. 新增旅程功能
-4. Google Map 串接
+3. CRUD旅程功能
+4. 上傳圖片並儲存到 DB
+5. Google Map 串接
 
 
 ## 技術
