@@ -180,7 +180,14 @@ const oAuthLogin = async(req,res ,next) => {
       case 'facebook':{
         console.log('fafa')
         const { data } = await axios.get(facebook_url)
-        console.log(data)
+        const access_token = data.access_token
+        const facebook_access_token_url = `https://graph.facebook.com/me?access_token=${access_token}&fields=name,picture,email`
+        const res = await axios.get(facebook_access_token_url) //使用 access_token 取得 info
+        console.log('res',res.data)
+        token = access_token
+        avatar = res.data.picture.data.url
+        email = res.data.email
+        name = res.data.name
         break;
       }
       case 'line':{
@@ -201,8 +208,8 @@ const oAuthLogin = async(req,res ,next) => {
   let detail 
   console.log('email',email)
 
-  if(provider === 'google' || provider === 'facebook'){
-    const { access_token, expires_in ,id_token} = content
+  if(provider === 'google'){
+    const {id_token} = content
     detail = (jwt_decode(id_token))
     token = id_token
     avatar = detail.picture

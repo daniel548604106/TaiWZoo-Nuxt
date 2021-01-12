@@ -61,8 +61,9 @@
         <div class="relative flex items-center" v-if="isUserLoggedIn">
           <div class="cursor-pointer mr-20px" >
             <nuxt-link to="/profile">
-             <div class="w-30px h-30px rounded-1/2 bg-cover" :style="{backgroundImage: `url(https://lh3.googleusercontent.com/a-/AOh14GiP_p5IKpU2fJy6IZihtk63Hrm0pIzMLx_aYySNtQ=s96-c)`}" alt="">
-             </div>
+            <img :src="avatarImage" class="rounded-1/2 w-30px h-30px" alt="">
+             <!-- <div class="w-30px h-30px rounded-1/2 bg-cover" :style="`{backgroundImage: url(${avatarImage})}`" alt="">
+             </div> -->
             </nuxt-link>
           </div>
           <div @click="toggleSideMenu" class="cursor-pointer">

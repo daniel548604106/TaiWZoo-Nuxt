@@ -63,7 +63,7 @@ export const actions ={
     console.log(data.user[provider].token)
     Cookie.set('auth', data.user[provider].token)
     console.log('auth', Cookie.get('auth'))
-    Cookie.set('userInfo', JSON.stringify(data.account))
+    Cookie.set('userInfo', JSON.stringify(data.user[provider]))
     console.log('oauth',data)
     commit('setUserLogin')
 
